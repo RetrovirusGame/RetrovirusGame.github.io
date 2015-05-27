@@ -5,8 +5,13 @@ function init() {
 	height = window.innerHeight;
 	width = window.innerWidth;
 
-	c.width = window.innerWidth / 2;
-	c.height = window.innerHeight / 2;
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+	    c.width = window.innerWidth / 2
+	    c.width = window.innerHeight / 3
+	} else {
+	    c.width = window.innerWidth / 2;
+	    c.height = window.innerHeight / 2;
+	}
 
 	cW = c.width;
 	cH = c.height;
