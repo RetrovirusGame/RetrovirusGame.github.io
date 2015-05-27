@@ -1,0 +1,5 @@
+@font-face {
+  font-family: 'Glyphicons';
+  src:  url('glyphicons-halflings-regular.woff2') format('woff2'),
+        url('glyphicons-halflings-regular.woff') format('woff');
+}
