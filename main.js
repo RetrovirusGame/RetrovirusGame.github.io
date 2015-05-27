@@ -36,7 +36,7 @@ function init() {
 			ctx.stroke();
 		}
 	};
-	// grid(7, 4);
+	grid(5, 5);
 	// Grid for future helpfulness. 
 	writeText()
 }
