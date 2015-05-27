@@ -1,17 +1,16 @@
 function init() {
+    if (window.innerHeight > window.innerWidth) {
+        alert("Please use Landscape!");
+    }
+
  	var c, ctx, centerH, centerW, gridH, gridW, height, width;
  	c = document.getElementById("retrovirus");
 	ctx = c.getContext("2d");
 	height = window.innerHeight;
 	width = window.innerWidth;
 
-	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	    c.width = window.innerWidth / 2
-	    c.width = window.innerHeight / 3
-	} else {
-	    c.width = window.innerWidth / 2;
-	    c.height = window.innerHeight / 2;
-	}
+	c.width = window.innerWidth / 2;
+	c.height = window.innerHeight / 2;
 
 	cW = c.width;
 	cH = c.height;
