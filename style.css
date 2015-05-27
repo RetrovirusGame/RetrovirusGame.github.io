@@ -1,17 +1,29 @@
 @font-face {
-  font-family: 'Glyphicons';
-  src:  url('glyphicons-halflings-regular.woff2') format('woff2'),
-        url('glyphicons-halflings-regular.woff') format('woff');
+  font-family: "ABeeZee";
+  src:  url("ABeeZee-Regular.otf");
 }
 
 .header {
 	text-align: center;
-	font-family: Arial;
+	font-family: "ABeeZee";
 }
 
 .sub {
 	text-align: center;
-	font-family: Arial;
+	font-family: "ABeeZee";
 	font-size: 9pt;
 	color: #aaa;
+}
+
+.body {
+	margin-top: 5%;
+	font-family: "ABeeZee";
+	text-align: center;
+}
+.container {
+	margin-top: 5%;
+	margin-left: 25%;
+	border: 2px solid black;
+	width: 50%;
+	height: 400px;
 }
