@@ -3,3 +3,15 @@
   src:  url('glyphicons-halflings-regular.woff2') format('woff2'),
         url('glyphicons-halflings-regular.woff') format('woff');
 }
+
+.header {
+	text-align: center;
+	font-family: Arial;
+}
+
+.sub {
+	text-align: center;
+	font-family: Arial;
+	font-size: 9pt;
+	color: #aaa;
+}
