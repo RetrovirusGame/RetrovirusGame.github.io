@@ -23,7 +23,10 @@
 .container {
 	margin-top: 5%;
 	margin-left: 25%;
-	border: 2px solid black;
 	width: 50%;
 	height: 400px;
+}
+
+#retrovirus {
+	border: 1px solid black;
 }
