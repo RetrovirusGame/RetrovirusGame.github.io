@@ -2,10 +2,16 @@ function init() {
  	var c, ctx, centerH, centerW, gridH, gridW, height, width;
  	c = document.getElementById("retrovirus");
 	ctx = c.getContext("2d");
+	height = window.innerHeight;
+	width = window.innerWidth;
+
+	c.width = window.innerWidth / 2;
+	c.height = window.innerHeight / 2;
+
 	cW = c.width;
 	cH = c.height;
 	centerW = cW / 2;
-	centerH = cH / 2
+	centerH = cH / 2;
 
 	function writeText() {
 		ctx.textAlign = "center";
