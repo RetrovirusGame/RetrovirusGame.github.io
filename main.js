@@ -43,7 +43,7 @@ function init() {
     } else {
         ctx.textAlign = "center";
         ctx.font = "12pt ABeeZee";
-        ctx.fillText("Please use landscape mode.", 0, 0);
+        ctx.fillText("Please use landscape mode.", c.width / 2, c.height / 2);
     }
 
 
