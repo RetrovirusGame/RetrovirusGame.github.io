@@ -48,7 +48,7 @@ function init() {
     
 		startX = 0;
 		startY = 0;
-		window.addEventListener('keydown', function(event) {
+		window.addEventListener('keydown', function(event)) {
       switch (event.keyCode) {
         case 37: // Left
           else {
