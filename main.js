@@ -45,6 +45,57 @@ function init() {
         ctx.font = "12pt ABeeZee";
         ctx.fillText("Please use landscape mode.", c.width / 2, c.height / 2);
     }
+    
+		window.addEventListener('keydown', function(event) {
+      switch (event.keyCode) {
+        case 37: // Left
+          if(x-5 < 72) break; // This sets border
+          else {
+            c = document.getElementById("gameCanvas");
+            ctx = c.getContext("2d");  // Used to draw on canvas
+            ctx.moveTo(x,y);           // Draws line left
+            ctx.lineTo(x-=5,y);
+            ctx.stroke();
+            break;
+          }
+ 
+        case 38: // Up
+          if(y-5 < 70) break;
+          else {        
+            c = document.getElementById("gameCanvas");
+            ctx = c.getContext("2d");        
+            ctx.moveTo(x,y);
+            ctx.lineTo(x,y-=5);         // Draws line up
+            ctx.stroke();
+            break;
+          }
+
+        case 39: // Right
+          if(x+5 > 390) break;
+          else {       
+            c = document.getElementById("gameCanvas");
+            ctx = c.getContext("2d");        
+            ctx.moveTo(x,y);
+            ctx.lineTo(x+=5,y);         // Draws line right
+            ctx.stroke();
+            break;
+          }
+
+        case 40: // Down
+          if(y+5 > 300) break;
+          else {
+            c = document.getElementById("gameCanvas");
+            ctx = c.getContext("2d");       
+            ctx.moveTo(x,y);
+            ctx.lineTo(x,y+=5);         // Draws line down
+            ctx.stroke();
+            break;
+          }
+
+        case 32: //Space      
+          location.reload();            // Reloads page to erase
+      }      // switch
+  }, false); // end of function
 
 
 }
