@@ -1,10 +1,10 @@
 function init() {
+    var c, ctx, centerH, centerW, gridH, gridW, height, width;
+    c = document.getElementById("retrovirus");
+    ctx = c.getContext("2d");
+    height = window.innerHeight;
+    width = window.innerWidth;
     if (window.innerWidth > window.innerHeight) {
-        var c, ctx, centerH, centerW, gridH, gridW, height, width;
-        c = document.getElementById("retrovirus");
-        ctx = c.getContext("2d");
-        height = window.innerHeight;
-        width = window.innerWidth;
 
         c.width = window.innerWidth / 2;
         c.height = window.innerHeight / 2;
@@ -16,7 +16,7 @@ function init() {
 
         function writeText() {
             ctx.textAlign = "center";
-            ctx.font = "12pt Arial";
+            ctx.font = "12pt ABeeZee";
             ctx.fillText("Canvas!", centerW, centerH);
         };
 
@@ -38,11 +38,15 @@ function init() {
             }
         };
         grid(5, 5);
-        // Grid for future helpfulness. 
+        // Grid for future helpfulness.
         writeText()
+    } else {
+        ctx.textAlign = "center";
+        ctx.font = "12pt ABeeZee";
+        ctx.fillText("Please use landscape mode.", 0, 0);
     }
 
- 	
+
 }
 
 document.addEventListener("DOMContentLoaded", init, false);
