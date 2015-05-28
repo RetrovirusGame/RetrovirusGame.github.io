@@ -1,5 +1,5 @@
 function init() {
-    var c, ctx, centerH, centerW, gridH, gridW, height, width;
+    var c, ctx, centerH, centerW, gridH, gridW, height, width, startX, startY;
     c = document.getElementById("retrovirus");
     ctx = c.getContext("2d");
     height = window.innerHeight;
@@ -49,45 +49,33 @@ function init() {
 		window.addEventListener('keydown', function(event) {
       switch (event.keyCode) {
         case 37: // Left
-          if(x-5 < 72) break; // This sets border
           else {
-            c = document.getElementById("gameCanvas");
-            ctx = c.getContext("2d");  // Used to draw on canvas
-            ctx.moveTo(x,y);           // Draws line left
-            ctx.lineTo(x-=5,y);
+            ctx.moveTo(startX,startY);           // Draws line left
+            ctx.lineTo(startX-=5,startY);
             ctx.stroke();
             break;
           }
  
         case 38: // Up
-          if(y-5 < 70) break;
-          else {        
-            c = document.getElementById("gameCanvas");
-            ctx = c.getContext("2d");        
-            ctx.moveTo(x,y);
-            ctx.lineTo(x,y-=5);         // Draws line up
+          else {                
+            ctx.moveTo(startX,startY);
+            ctx.lineTo(startX,startY-=5);         // Draws line up
             ctx.stroke();
             break;
           }
 
         case 39: // Right
-          if(x+5 > 390) break;
-          else {       
-            c = document.getElementById("gameCanvas");
-            ctx = c.getContext("2d");        
-            ctx.moveTo(x,y);
-            ctx.lineTo(x+=5,y);         // Draws line right
+          else {              
+            ctx.moveTo(startX,startY);
+            ctx.lineTo(startX+=5,startY);         // Draws line right
             ctx.stroke();
             break;
           }
 
         case 40: // Down
-          if(y+5 > 300) break;
-          else {
-            c = document.getElementById("gameCanvas");
-            ctx = c.getContext("2d");       
-            ctx.moveTo(x,y);
-            ctx.lineTo(x,y+=5);         // Draws line down
+          else {    
+            ctx.moveTo(startX,startY);
+            ctx.lineTo(startX,startY+=5);         // Draws line down
             ctx.stroke();
             break;
           }
