@@ -1,5 +1,5 @@
 function init() {
-    var c, ctx, centerH, centerW, gridH, gridW, height, width, startX, startY;
+    var c, ctx, centerH, centerW, gridH, gridW, height, width;
     c = document.getElementById("retrovirus");
     ctx = c.getContext("2d");
     height = window.innerHeight;
@@ -27,8 +27,9 @@ function init() {
                 pos = gridW * i;
                 ctx.moveTo(pos, 0);
                 ctx.lineTo(pos, cH);
-                ctx.stroke();
+			          ctx.stroke();
             }
+					
             for (var i = height - 1; i > 0; i--) {
                 gridH = cH / height;
                 pos = gridH * i;
@@ -47,15 +48,15 @@ function init() {
         ctx.fillText("Please use landscape mode.", c.width / 2, c.height / 2);
     }
     
-		startX = 0;
-		startY = 0;
+		var startX = 0;
+		var startY = 0;
 		window.addEventListener('keydown', function(event) {
       switch (event.keyCode) {
         case 37: // Left
-          ctx.moveTo(startX,startY);           // Draws line left
-          ctx.lineTo(startX-=5,startY);
-          ctx.stroke();
-          break;
+            ctx.moveTo(startX,startY);           // Draws line left
+            ctx.lineTo(startX-=5,startY);
+            ctx.stroke();
+            break;
  
         case 38: // Up             
             ctx.moveTo(startX,startY);
@@ -74,13 +75,9 @@ function init() {
             ctx.lineTo(startX,startY+=5);         // Draws line down
             ctx.stroke();
             break;
-
-        case 32: //Space      
-          location.reload();            // Reloads page to erase
+					
       }      // switch
-  }, false); // end of function
-
-
+    }, false); // end of function
 }
 
 document.addEventListener("DOMContentLoaded", init, false);
