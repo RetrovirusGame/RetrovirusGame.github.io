@@ -37,6 +37,7 @@ function init() {
                 ctx.stroke();
             }
         };
+				
         grid(5, 5);
         // Grid for future helpfulness.
         writeText()
@@ -48,39 +49,31 @@ function init() {
     
 		startX = 0;
 		startY = 0;
-		window.addEventListener('keydown', function(event)) {
+		window.addEventListener('keydown', function(event) {
       switch (event.keyCode) {
         case 37: // Left
-          else {
-            ctx.moveTo(startX,startY);           // Draws line left
-            ctx.lineTo(startX-=5,startY);
-            ctx.stroke();
-            break;
-          }
+          ctx.moveTo(startX,startY);           // Draws line left
+          ctx.lineTo(startX-=5,startY);
+          ctx.stroke();
+          break;
  
-        case 38: // Up
-          else {                
+        case 38: // Up             
             ctx.moveTo(startX,startY);
             ctx.lineTo(startX,startY-=5);         // Draws line up
             ctx.stroke();
             break;
-          }
 
-        case 39: // Right
-          else {              
+        case 39: // Right       
             ctx.moveTo(startX,startY);
             ctx.lineTo(startX+=5,startY);         // Draws line right
             ctx.stroke();
             break;
-          }
 
         case 40: // Down
-          else {    
             ctx.moveTo(startX,startY);
             ctx.lineTo(startX,startY+=5);         // Draws line down
             ctx.stroke();
             break;
-          }
 
         case 32: //Space      
           location.reload();            // Reloads page to erase
