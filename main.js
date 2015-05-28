@@ -46,6 +46,8 @@ function init() {
         ctx.fillText("Please use landscape mode.", c.width / 2, c.height / 2);
     }
     
+		startX = 0;
+		startY = 0;
 		window.addEventListener('keydown', function(event) {
       switch (event.keyCode) {
         case 37: // Left
