@@ -6,8 +6,12 @@ function init() {
     width = window.innerWidth;
     if (window.innerWidth > window.innerHeight) {
 
-        c.width = window.innerWidth / 2;
-        c.height = window.innerHeight / 2;
+        c.width = window.innerWidth - 18;
+        c.height = window.innerHeight - 22;
+
+        ctx.rect(0,0,c.width,c.height);
+        ctx.fillStyle="black";
+        ctx.fill();
 
         cW = c.width;
         cH = c.height;
@@ -20,60 +24,94 @@ function init() {
             ctx.fillText("Canvas!", centerW, centerH);
         };
 
-        function grid(width, height) {
+        function grid(square) {
             var pos;
-            for (var i = width - 1; i > 0; i--) {
-                gridW = cW / width;
+            for (var i = square - 1; i > 0; i--) {
+                gridW = cW / square;
                 pos = gridW * i;
-                ctx.moveTo(pos, 0);
-                ctx.lineTo(pos, cH);
-			          ctx.stroke();
+            //    ctx.moveTo(pos, 0);
+            //    ctx.lineTo(pos, cH);
+			//	  ctx.stroke();
             }
-					
-            for (var i = height - 1; i > 0; i--) {
-                gridH = cH / height;
+
+            for (var i = square - 1; i > 0; i--) {
+                gridH = gridW;
                 pos = gridH * i;
-                ctx.moveTo(0, pos);
-                ctx.lineTo(cW, pos);
-                ctx.stroke();
+                // ctx.moveTo(0, pos);
+                // ctx.lineTo(cW, pos);
+                // ctx.stroke();
             }
         };
 				
-        grid(5, 5);
+        grid(20);
         // Grid for future helpfulness.
-        writeText()
     } else {
         ctx.textAlign = "center";
         ctx.font = "12pt ABeeZee";
         ctx.fillText("Please use landscape mode.", c.width / 2, c.height / 2);
     }
+
+    	var Virus = function(x, y) {
+			this.x = x;
+			this.y = y;
+		};
+
+		Virus.prototype = {
+			move: function(newX, newY) {
+				ctx.moveTo(this.x, this.y);
+				ctx.lineTo(newX, newY);
+				ctx.strokeStyle = "white";
+				ctx.stroke();
+				return this;
+			}
+		};
+
+		var blah = new Virus();
     
-		var startX = 0;
-		var startY = 0;
+		var startX = centerW;
+		var startY = centerH - gridH / 2;
+		blah.x = startX;
+		blah.y = startY;
 		window.addEventListener('keydown', function(event) {
       switch (event.keyCode) {
         case 37: // Left
-            ctx.moveTo(startX,startY);           // Draws line left
-            ctx.lineTo(startX-=5,startY);
-            ctx.stroke();
-            break;
+            if(blah.x - gridW < 0) {}
+            else {
+            	ctx.moveTo(blah.x,blah.y);           // Draws line left
+            	ctx.lineTo(blah.x-=gridW,blah.y);
+            	ctx.strokeStyle = "white";
+            	ctx.stroke();
+        	}
+        	break;
  
         case 38: // Up             
-            ctx.moveTo(startX,startY);
-            ctx.lineTo(startX,startY-=5);         // Draws line up
-            ctx.stroke();
+            if(blah.y < 0) {}
+           	else {
+           		ctx.moveTo(blah.x,blah.y);
+            	ctx.lineTo(blah.x,blah.y-=gridW);
+            	ctx.strokeStyle = "white";         // Draws line up
+            	ctx.stroke();
+           	}
             break;
 
         case 39: // Right       
-            ctx.moveTo(startX,startY);
-            ctx.lineTo(startX+=5,startY);         // Draws line right
-            ctx.stroke();
+        	if(blah.x + gridW + gridW > c.width) {}
+        	else {
+                ctx.moveTo(blah.x,blah.y);
+            	ctx.lineTo(blah.x+=gridW,blah.y);
+            	ctx.strokeStyle = "white";         // Draws line right
+            	ctx.stroke();
+        	}
             break;
 
         case 40: // Down
-            ctx.moveTo(startX,startY);
-            ctx.lineTo(startX,startY+=5);         // Draws line down
-            ctx.stroke();
+            if(blah.y + gridH > c.height) {}
+            else {
+            	ctx.moveTo(blah.x, blah.y);
+            	ctx.lineTo(blah.x, blah.y += gridH);
+            	ctx.strokeStyle = "white";
+            	ctx.stroke();	
+            }
             break;
 					
       }      // switch

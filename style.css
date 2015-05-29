@@ -2,31 +2,3 @@
   font-family: "ABeeZee";
   src:  url("ABeeZee-Regular.otf");
 }
-
-.header {
-	text-align: center;
-	font-family: "ABeeZee";
-}
-
-.sub {
-	text-align: center;
-	font-family: "ABeeZee";
-	font-size: 9pt;
-	color: #aaa;
-}
-
-.body {
-	margin-top: 5%;
-	font-family: "ABeeZee";
-	text-align: center;
-}
-.container {
-	margin-top: 5%;
-	margin-left: 25%;
-	width: 50%;
-	height: 400px;
-}
-
-#retrovirus {
-	border: 1px solid black;
-}
