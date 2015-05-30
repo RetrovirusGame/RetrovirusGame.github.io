@@ -13,7 +13,7 @@ function init() {
         centerW = cW / 2;
         centerH = cH / 2;
 
-        ctx.rect(0, 0, c.W, cH);
+        ctx.rect(0, 0, cW, cH);
         ctx.fillStyle = "black";
         ctx.fill();
 
