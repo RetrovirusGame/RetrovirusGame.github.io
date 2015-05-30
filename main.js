@@ -4,19 +4,18 @@ function init() {
     ctx = c.getContext("2d");
     height = window.innerHeight;
     width = window.innerWidth;
-    if (window.innerWidth > window.innerHeight) {
+    if (width > height) {
 
-        c.width = window.innerWidth - 18;
-        c.height = window.innerHeight - 22;
-
-        ctx.rect(0,0,c.width,c.height);
-        ctx.fillStyle="black";
-        ctx.fill();
-
+        c.width = width - 18;
+        c.height = height - 22;
         cW = c.width;
         cH = c.height;
         centerW = cW / 2;
         centerH = cH / 2;
+
+        ctx.rect(0, 0, c.W, cH);
+        ctx.fillStyle = "black";
+        ctx.fill();
 
         function writeText() {
             ctx.textAlign = "center";
@@ -29,9 +28,9 @@ function init() {
             for (var i = square - 1; i > 0; i--) {
                 gridW = cW / square;
                 pos = gridW * i;
-            //    ctx.moveTo(pos, 0);
-            //    ctx.lineTo(pos, cH);
-			//	  ctx.stroke();
+            	// ctx.moveTo(pos, 0);
+            	// ctx.lineTo(pos, cH);
+				// ctx.stroke();
             }
 
             for (var i = square - 1; i > 0; i--) {
@@ -48,74 +47,68 @@ function init() {
     } else {
         ctx.textAlign = "center";
         ctx.font = "12pt ABeeZee";
-        ctx.fillText("Please use landscape mode.", c.width / 2, c.height / 2);
+        ctx.fillText("Please use landscape mode.", centerW, centerH);
     }
 
-    	var Virus = function(x, y) {
-			this.x = x;
-			this.y = y;
-		};
+    var RetroVirus = function(x, y) {
+		this.x = x;
+		this.y = y;
+	};
 
-		Virus.prototype = {
+	RetroVirus.prototype = {
 			move: function(newX, newY) {
-				ctx.moveTo(this.x, this.y);
-				ctx.lineTo(newX, newY);
-				ctx.strokeStyle = "white";
-				ctx.stroke();
-				return this;
-			}
-		};
+			ctx.moveTo(this.x, this.y);
+			return this.x * this.y;
+		}
+	};
 
-		var blah = new Virus();
+	var virus = new RetroVirus();
     
-		var startX = centerW;
-		var startY = centerH - gridH / 2;
-		blah.x = startX;
-		blah.y = startY;
-		window.addEventListener('keydown', function(event) {
-      switch (event.keyCode) {
-        case 37: // Left
-            if(blah.x - gridW < 0) {}
-            else {
-            	ctx.moveTo(blah.x,blah.y);           // Draws line left
-            	ctx.lineTo(blah.x-=gridW,blah.y);
-            	ctx.strokeStyle = "white";
-            	ctx.stroke();
-        	}
-        	break;
+	virus.x = centerW;
+	virus.y = centerH - gridH / 2;
+	window.addEventListener('keydown', function(event) {
+    	switch (event.keyCode) {
+    		case 37: // Left
+    			if(virus.x - gridW < 0) {}
+    			else {
+        			ctx.moveTo(virus.x, virus.y);
+        			ctx.lineTo(virus.x -= gridW, virus.y);
+        			ctx.strokeStyle = "white";
+        			ctx.stroke();
+    			}
+    			break;
  
-        case 38: // Up             
-            if(blah.y < 0) {}
-           	else {
-           		ctx.moveTo(blah.x,blah.y);
-            	ctx.lineTo(blah.x,blah.y-=gridW);
-            	ctx.strokeStyle = "white";         // Draws line up
-            	ctx.stroke();
-           	}
-            break;
+    		case 38: // Up             
+       			if(virus.y < 0) {}
+        		else {
+           			ctx.moveTo(virus.x, virus.y);
+            		ctx.lineTo(virus.x, virus.y -= gridH);
+            		ctx.strokeStyle = "white";
+        	   		ctx.stroke();
+        		}
+    			break;
 
-        case 39: // Right       
-        	if(blah.x + gridW + gridW > c.width) {}
-        	else {
-                ctx.moveTo(blah.x,blah.y);
-            	ctx.lineTo(blah.x+=gridW,blah.y);
-            	ctx.strokeStyle = "white";         // Draws line right
-            	ctx.stroke();
-        	}
-            break;
+        	case 39: // Right       
+        		if(virus.x + gridW * 2 > cW) {}
+       			else {
+               		ctx.moveTo(virus.x, virus.y);
+           			ctx.lineTo(virus.x += gridW, virus.y);
+           			ctx.strokeStyle = "white";
+           			ctx.stroke();
+       			}
+       			break;
 
-        case 40: // Down
-            if(blah.y + gridH > c.height) {}
-            else {
-            	ctx.moveTo(blah.x, blah.y);
-            	ctx.lineTo(blah.x, blah.y += gridH);
+       		case 40: // Down
+           		if(virus.y + gridH > cH) {}
+           		else {
+           		ctx.moveTo(virus.x, virus.y);
+            	ctx.lineTo(virus.x, virus.y += gridH);
             	ctx.strokeStyle = "white";
             	ctx.stroke();	
-            }
-            break;
-					
-      }      // switch
-    }, false); // end of function
+            	}
+            	break;
+    	}
+    }, false);
 }
 
 document.addEventListener("DOMContentLoaded", init, false);
