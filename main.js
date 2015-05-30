@@ -1,11 +1,15 @@
 function init() {
-    var c, ctx, centerH, centerW, gridH, gridW, height, width;
-    c = document.getElementById("retrovirus");
-    ctx = c.getContext("2d");
-    height = window.innerHeight;
-    width = window.innerWidth;
+    var c = document.getElementById("retrovirus"),
+    	ctx = c.getContext("2d"),
+    	height = window.innerHeight,
+    	width = window.innerWidth,
+    	centerH,
+    	centerW,
+    	cW,
+    	cH,
+    	gridH,
+    	gridW;
     if (width > height) {
-
         c.width = width - 18;
         c.height = height - 22;
         cW = c.width;
@@ -17,10 +21,10 @@ function init() {
         ctx.fillStyle = "black";
         ctx.fill();
 
-        function writeText() {
+        function writeText(text) {
             ctx.textAlign = "center";
             ctx.font = "12pt ABeeZee";
-            ctx.fillText("Canvas!", centerW, centerH);
+            ctx.fillText(text, centerW, centerH);
         };
 
         function grid(square) {
