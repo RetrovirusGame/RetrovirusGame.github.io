@@ -1,6 +1,6 @@
 function init() { // Main function
   var c = document.getElementById("retrovirus"), // Access the canvas
-  // image = document.getElementById("img"),
+  img = document.getElementById("img"),
 	ctx = c.getContext("2d"), // 2D Canvas context
 	height = window.innerHeight, // Shortcut to window.innerHeight
   width = window.innerWidth, // Shortcut to window.innerWidth
@@ -63,14 +63,7 @@ function init() { // Main function
 
 	RetroVirus.prototype = { // Virus prototype functions
 		move : function(newX, newY) {
-			/* var imgX = image.offsetLeft
-      var imgY = image.offsetRight
-
-      var img = document.createElement("img")
-      img.setAttribute('src', 'http://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/1024px-Smiley.svg.png')
-      img.style.left = imgX + "px"
-      img.style.top = imgY + "px"
-      document.body.appendChild(img) */
+      ctx.drawImage(img, newX, newY)
 
       ctx.moveTo(this.x, this.y)
       ctx.lineTo(newX, newY)
