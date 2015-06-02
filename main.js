@@ -34,17 +34,17 @@ function init() { // Main function
       for (var i = square - 1; i > 0; i--) {
         gridW = cW / square
         pos = gridW * i
-      	// ctx.moveTo(pos, 0)
-     	  // ctx.lineTo(pos, cH)
-			  // ctx.stroke()
+      	ctx.moveTo(pos, 0)
+     	  ctx.lineTo(pos, cH)
+			  ctx.stroke()
       }
 
       for (var i = square - 1; i > 0; i--) {
         gridH = gridW // Ensure a square
         pos = gridH * i
-        // ctx.moveTo(0, pos)
-        // ctx.lineTo(cW, pos)
-        // ctx.stroke()
+        ctx.moveTo(0, pos)
+        ctx.lineTo(cW, pos)
+        ctx.stroke()
       }
     }
 
@@ -76,7 +76,7 @@ function init() { // Main function
 	var virus = new RetroVirus() // Create new virus with constructor
     
 	virus.x = centerW // Set the virus's starting position
-	virus.y = centerH - gridH / 2
+	virus.y = centerH // - gridH / 2
 	
 	window.addEventListener('keydown', function(event) { // Key listener
     switch (event.keyCode) {
