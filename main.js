@@ -18,7 +18,7 @@ function init() { // Main function
 
     function writeText(text) { // Text writing function
       		ctx.textAlign = "center"
-		   	ctx.font = "12pt ABeeZee"
+		ctx.font = "12pt ABeeZee"
     	  	ctx.fillText(text, centerW, centerH)
     	}
     
@@ -33,11 +33,11 @@ function init() { // Main function
 
 	RetroVirus.prototype = { // Virus prototype functions
 		move : function(newX, newY) {
-      		ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
-            ctx.drawImage(img, newX, newY)
+      			ctx.clearRect(0, 0, cW, cH)
+            		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+            		ctx.fillStyle = "black"
+            		ctx.fill()
+            		ctx.drawImage(img, newX, newY)
 			return this.x * this.y
 		}
 	}
@@ -50,48 +50,48 @@ function init() { // Main function
    	
    		// ========== CANVAS INITIATION v ==========
   
-    	c.width = width - 18 // Margins v
-    	c.height = height - 22 // Margins ^
-    	cW = c.width
-    	cH = c.height
-    	centerW = cW / 2
-    	centerH = cH / 2
+    		c.width = width - 18 // Margins v
+    		c.height = height - 22 // Margins ^
+    		cW = c.width
+    		cH = c.height
+    		centerW = cW / 2
+    		centerH = cH / 2
 
-    	ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-    	ctx.fillStyle = "black"
-    	ctx.fill()
+    		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+    		ctx.fillStyle = "black"
+    		ctx.fill()
     	
-    	// ========== CANVAS INITIATION ^ ==========
+    		// ========== CANVAS INITIATION ^ ==========
     	
-    	// ========== SPECIAL FUNCTIONS v ==========
+    		// ========== SPECIAL FUNCTIONS v ==========
 
-    	function grid(countX) { // Sections where the virus will be
-      		var pos; // Position to start/end the line
-      		for (var i = countX - 1; i > 0; i--) {
-        		gridW = cW / countX
-        		pos = gridW * i
-      			ctx.moveTo(pos, 0)
-     			ctx.lineTo(pos, cH)
+    		function grid(countX) { // Sections where the virus will be
+      			var pos; // Position to start/end the line
+      			for (var i = countX - 1; i > 0; i--) {
+        			gridW = cW / countX
+        			pos = gridW * i
+      				ctx.moveTo(pos, 0)
+     				ctx.lineTo(pos, cH)
 				ctx.stroke()
-      		}
+      			}
 
-    		for (var i = countX - 1; i > 0; i--) {
-        		gridH = gridW // Ensure a square
-        		pos = gridH * i
-        		ctx.moveTo(0, pos)
-        		ctx.lineTo(cW, pos)
-        		ctx.stroke()
-      		}
-    	}
+    			for (var i = countX - 1; i > 0; i--) {
+        			gridH = gridW // Ensure a square
+        			pos = gridH * i
+        			ctx.moveTo(0, pos)
+        			ctx.lineTo(cW, pos)
+        			ctx.stroke()
+      			}
+    		}
 
 		// ========== SPECIAL FUNCTIONS ^ ==========
 		
-    	grid(20) // 20 squares across
+    		grid(20) // 20 squares across
   	
   	} else { // If in portrait mode
-    	ctx.textAlign = "center"
-    	ctx.font = "12pt ABeeZee"
-    	ctx.fillText("Please use landscape mode.", centerW, centerH)
+    		ctx.textAlign = "center"
+    		ctx.font = "12pt ABeeZee"
+    		ctx.fillText("Please use landscape mode.", centerW, centerH)
   	}
     
 	virus.x = centerW // Set the virus's starting position
@@ -101,16 +101,16 @@ function init() { // Main function
 	
 	window.addEventListener("keydown", function(event) { // Key listener
     	switch (event.keyCode) {
-  			case 37: // Left
-  				if(virus.x < 0) {} // For edge collision
-   				else { // Print image at new position
-   					virus.move(virus.x - gridW, virus.y)
-   					virus.x -= gridW
+  		case 37: // Left
+  			if(virus.x < 0) {} // For edge collision
+   			else { // Print image at new position
+   				virus.move(virus.x - gridW, virus.y)
+   				virus.x -= gridW
     			}
     			break
  
     		case 38: // Up             
-   				if(virus.y - gridH < 0) {}
+   			if(virus.y - gridH < 0) {}
     			else {
       				virus.move(virus.x, virus.y - gridH)
       				virus.y -= gridH
@@ -122,14 +122,14 @@ function init() { // Main function
     			else {
         			virus.move(virus.x + gridW, virus.y)
      				virus.x += gridW
-   				}
+   			}
     			break
 
       		case 40: // Down
         		if(virus.y + gridH > cH) {}
      			else {
-          		virus.move(virus.x, virus.y + gridH)
-        		virus.y += gridH
+		       		virus.move(virus.x, virus.y + gridH)
+        			virus.y += gridH
       			}
       			break
     		}
