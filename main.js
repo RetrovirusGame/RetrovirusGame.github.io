@@ -99,7 +99,7 @@ function init() { // Main function
 	
 	// ========== CRUCIAL FUNDEMENTALS v ==========
 	
-	window.addEventListener("keyup", function(event) { // Key listener
+	window.addEventListener("keydown", function(event) { // Key listener
     	switch (event.keyCode) {
   			case 37: // Left
   				if(virus.x < 0) {} // For edge collision
