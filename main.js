@@ -50,8 +50,8 @@ function init() { // Main function
    	
    		// ========== CANVAS INITIATION v ==========
   
-    		c.width = width - 18 // Margins v
-    		c.height = height - 22 // Margins ^
+    		c.width = width
+    		c.height = height
     		cW = c.width
     		cH = c.height
     		centerW = cW / 2
