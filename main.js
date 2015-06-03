@@ -89,7 +89,10 @@ function init() { // Main function
 		
 		virus.render = function() {
 			drawImage(img, virus.x, virus.y)
+			return img
 		}
+		
+		virus.render()
 	
 		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
 		ctx.fillStyle = "black"
