@@ -95,7 +95,7 @@ function init() { // Main function
   	}
     
 	virus.x = centerW // Set the virus's starting position
-	virus.y = centerH // - gridH / 2
+	virus.y = centerH - gridH / 2 // To offset image for collision
 	
 	// ========== CRUCIAL FUNDEMENTALS v ==========
 	
