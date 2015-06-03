@@ -68,10 +68,10 @@ function init() { // Main function
         		pos = gridW * i
       			ctx.moveTo(pos, 0)
      			ctx.lineTo(pos, cH)
-				ctx.stroke()
+			ctx.stroke()
       		}
 
-    		for (var i = square - 1; i > 0; i--) {
+    		for (var i = countX - 1; i > 0; i--) {
         		gridH = gridW // Ensure a square
         		pos = gridH * i
         		ctx.moveTo(0, pos)
