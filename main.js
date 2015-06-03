@@ -50,8 +50,8 @@ function init() { // Main function
    	
    		// ========== CANVAS INITIATION v ==========
   
-    		c.width = width - 18
-    		c.height = height - 22
+    		c.width = width - 9
+    		c.height = height - 11
     		cW = c.width
     		cH = c.height
     		centerW = cW / 2
