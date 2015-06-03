@@ -66,6 +66,15 @@ function init() { // Main function
 		centerH = cH / 2
 			
     	
+    		virus.x = centerW // Set the virus's starting position
+		virus.y = centerH - gridH / 2 // To offset image for collision
+	
+		virus.render() // Render on load
+	
+		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+		ctx.fillStyle = "black"
+		ctx.fill()
+    	
 		// ========== CANVAS INITIATION ^ ==========
     	
 		// ========== SPECIAL FUNCTIONS v ==========
@@ -98,15 +107,6 @@ function init() { // Main function
 		ctx.font = "12pt ABeeZee"
 		ctx.fillText("Please use landscape mode.", centerW, centerH)
 	}
-    
-	virus.x = centerW // Set the virus's starting position
-	virus.y = centerH - gridH / 2 // To offset image for collision
-	
-	virus.render() // Render on load
-	
-	ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-	ctx.fillStyle = "black"
-	ctx.fill()
 	
 	// ========== CRUCIAL FUNDEMENTALS v ==========
 	
