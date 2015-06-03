@@ -56,7 +56,7 @@ function init() { // Main function
     	
    	if (width > height) { // If in landscape mode
    	
-   		// ========== CANVAS INITIATION v ==========
+   		// ========== SECOND VARIABLE INITIATION v ==========
   
 		c.width = width - 18
 		c.height = height - 22
@@ -64,18 +64,8 @@ function init() { // Main function
 		cH = c.height
 		centerW = cW / 2
 		centerH = cH / 2
-			
     	
-    		virus.x = centerW // Set the virus's starting position
-		virus.y = centerH - gridH / 2 // To offset image for collision
-	
-		virus.render() // Render on load
-	
-		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-		ctx.fillStyle = "black"
-		ctx.fill()
-    	
-		// ========== CANVAS INITIATION ^ ==========
+		// ========== SECOND VARIABLE INITIATION ^ ==========
     	
 		// ========== SPECIAL FUNCTIONS v ==========
 
@@ -101,6 +91,15 @@ function init() { // Main function
 		// ========== SPECIAL FUNCTIONS ^ ==========
 
 		grid(20) // 20 squares across
+		
+		virus.x = centerW // Set the virus's starting position
+		virus.y = centerH - gridH / 2 // To offset image for collision
+		
+		virus.render() // Render on load
+	
+		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+		ctx.fillStyle = "black"
+		ctx.fill()
   	
 	} else { // If in portrait mode
 		ctx.textAlign = "center"
