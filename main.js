@@ -72,7 +72,7 @@ function init() { // Main function
         		pos = gridW * i
       			ctx.moveTo(pos, 0)
      			ctx.lineTo(pos, cH)
-			ctx.stroke()
+				ctx.stroke()
       		}
 
     		for (var i = countX - 1; i > 0; i--) {
@@ -102,7 +102,7 @@ function init() { // Main function
 	window.addEventListener('keydown', function(event) { // Key listener
     	switch (event.keyCode) {
   			case 37: // Left
-  				if(virus.x - gridW < 0) {} // For edge collision
+  				if(virus.x < 0) {} // For edge collision
    				else { // Print image at new position
    					virus.move(virus.x - gridW, virus.y)
    					virus.x -= gridW
@@ -110,7 +110,7 @@ function init() { // Main function
     			break
  
     		case 38: // Up             
-   				if(virus.y < 0) {}
+   				if(virus.y - gridH < 0) {}
     			else {
       				virus.move(virus.x, virus.y - gridH)
       				virus.y -= gridH
