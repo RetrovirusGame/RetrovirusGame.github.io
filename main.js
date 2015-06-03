@@ -16,13 +16,13 @@ function init() { // Main function
  	
  	// ========== GLOBAL FUNCTIONS v ==========
 
-    function writeText(text) { // Text writing function
+    	function writeText(text) { // Text writing function
       		ctx.textAlign = "center"
 		ctx.font = "12pt ABeeZee"
     	  	ctx.fillText(text, centerW, centerH)
     	}
     
-    // ========== GLOBAL FUNCTIONS ^ ==========
+    	// ========== GLOBAL FUNCTIONS ^ ==========
  	
  	// ========== CLASSES v ==========
  	
