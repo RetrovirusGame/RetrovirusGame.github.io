@@ -33,12 +33,12 @@ function init() { // Main function
 
 	RetroVirus.prototype = { // Virus prototype functions
 		move : function(newX, newY) {
-				ctx.clearRect(0, 0, cW, cH)
-				ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-				ctx.fillStyle = "black"
-				ctx.fill()
-				ctx.drawImage(img, newX, newY)
-				return this.x * this.y
+			ctx.clearRect(0, 0, cW, cH)
+			ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+			ctx.fillStyle = "black"
+			ctx.fill()
+			ctx.drawImage(img, newX, newY)
+			return this.x * this.y
 		}
 	}
 	
