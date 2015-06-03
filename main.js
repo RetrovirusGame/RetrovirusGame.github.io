@@ -95,7 +95,7 @@ function init() { // Main function
 	}
     
 	virus.x = centerW // Set the virus's starting position
-	virus.y = centerH - gridH / 2 // To offset image for collision
+	virus.y = centerH + gridH / 2 // To offset image for collision
 	
 	virus.move(virus.x, virus.y) // Render on load
 	
@@ -112,7 +112,7 @@ function init() { // Main function
 				break
  
 			case 38: // Up             
-				if(virus.y - gridH < 0) {}
+				if(virus.y < 0) {}
 				else {
 					virus.move(virus.x, virus.y - gridH)
 					virus.y -= gridH
@@ -128,7 +128,7 @@ function init() { // Main function
 				break
 
 			case 40: // Down
-				if(virus.y + gridH + gridH > cH) {}
+				if(virus.y + gridH > cH) {}
 				else {
 					virus.move(virus.x, virus.y + gridH)
 					virus.y += gridH
