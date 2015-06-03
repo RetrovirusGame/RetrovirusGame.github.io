@@ -15,8 +15,8 @@ function init() { // Main function
  	// ========== VARIABLE INITIATION ^ ==========
  	
  	// ========== GLOBAL FUNCTIONS v ==========
- 	
- 	function writeText(text) { // Text writing function
+
+    function writeText(text) { // Text writing function
       		ctx.textAlign = "center"
 		   	ctx.font = "12pt ABeeZee"
     	  	ctx.fillText(text, centerW, centerH)
