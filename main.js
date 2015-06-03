@@ -65,9 +65,6 @@ function init() { // Main function
 		centerW = cW / 2
 		centerH = cH / 2
 			
-		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-		ctx.fillStyle = "black"
-		ctx.fill()
     	
 		// ========== CANVAS INITIATION ^ ==========
     	
@@ -106,6 +103,10 @@ function init() { // Main function
 	virus.y = centerH - gridH / 2 // To offset image for collision
 	
 	virus.render() // Render on load
+	
+	ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+	ctx.fillStyle = "black"
+	ctx.fill()
 	
 	// ========== CRUCIAL FUNDEMENTALS v ==========
 	
