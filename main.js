@@ -88,7 +88,7 @@ function init() { // Main function
 		virus.y = centerH - gridH / 2 // To offset image for collision
 		
 		virus.render = function() {
-			drawImage(img, virus.x, virus.y)
+			ctx.drawImage(img, virus.x, virus.y)
 			return img
 		}
 		
