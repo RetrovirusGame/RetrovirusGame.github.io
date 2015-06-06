@@ -4,7 +4,7 @@ function init() { // Main function
 		vImg = document.getElementById("vImg"), // Virus's image
         abImg1 = document.getElementById("abImg1"),
         abImg2 = document.getElementById("abImg2"),
-        abImg3 = document.getElementById("abImg3"),
+        abImg3 = document.getElementById("abImg3"), // Antibodys are a little redundant, but i can't get around it
         abImg4 = document.getElementById("abImg4"),
         abImg5 = document.getElementById("abImg5"),
 		ctx = c.getContext("2d"), // 2D Canvas context
