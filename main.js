@@ -7,7 +7,7 @@ function init() { // Main function
         	abImg3 = document.getElementById("abImg3"), // Antibodys are a little redundant, but i can't get around it
         	abImg4 = document.getElementById("abImg4"),
         	abImg5 = document.getElementById("abImg5"),
-        	abCount = 5;
+        	abCount = 5,
         	numbers = [], // Possible array fix
         	abImg = [], // Possible array fix
 		ctx = c.getContext("2d"), // 2D Canvas context
