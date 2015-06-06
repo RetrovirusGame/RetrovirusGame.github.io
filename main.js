@@ -253,10 +253,7 @@ function init() { // Main function
                 antibody1.move(antibody1.x, antibody1.y -= gridW)
             }
 
-            else {
-                antibody1.move(antibody1.x += gridW, antibody1.y)
-            }
-    }, 1000)
+    }, 500)
 
     setInterval(function() {
             if (antibody2.x - virus.x > 0 && antibody2.x - virus.x > antibody2.y - virus.y) {
@@ -275,10 +272,7 @@ function init() { // Main function
                 antibody2.move(antibody2.x, antibody2.y -= gridW)
             }
 
-            else {
-                antibody2.move(antibody2.x += gridW, antibody2.y)
-            }
-    }, 1000)
+    }, 500)
 
     setInterval(function() {
             if (antibody3.x - virus.x > 0 && antibody3.x - virus.x > antibody3.y - virus.y) {
@@ -297,10 +291,7 @@ function init() { // Main function
                 antibody3.move(antibody3.x, antibody3.y -= gridW)
             }
 
-            else {
-                antibody3.move(antibody3.x += gridW, antibody3.y)
-            }
-    }, 1000)
+    }, 500)
 
     setInterval(function() {
             if (antibody4.x - virus.x > 0 && antibody4.x - virus.x > antibody4.y - virus.y) {
@@ -319,10 +310,7 @@ function init() { // Main function
                 antibody4.move(antibody4.x, antibody4.y -= gridW)
             }
 
-            else {
-                antibody4.move(antibody4.x += gridW, antibody4.y)
-            }
-    }, 1000)
+    }, 500)
 
     setInterval(function() {
             if (antibody5.x - virus.x > 0 && antibody5.x - virus.x > antibody5.y - virus.y) {
@@ -341,10 +329,7 @@ function init() { // Main function
                 antibody5.move(antibody5.x, antibody5.y -= gridW)
             }
 
-            else {
-                antibody5.move(antibody5.x += gridW, antibody5.y)
-            }
-    }, 1000)
+    }, 500)
 
 	window.addEventListener("keydown", function(event) { // Key listener
 		switch (event.keyCode) {
