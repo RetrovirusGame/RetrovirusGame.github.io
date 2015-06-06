@@ -38,10 +38,16 @@ function init() { // Main function
 			ctx.clearRect(0, 0, cW, cH)
 			ctx.rect(0, 0, cW, cH) // Set the canvas background to black
 			ctx.fillStyle = "black"
+<<<<<<< HEAD
             ctx.fill()
 			ctx.drawImage(vImg, newX, newY)
             antibody1.render()
             antibody2.render()
+=======
+			ctx.fill()
+			grid(20)
+			ctx.drawImage(img, newX, newY)
+>>>>>>> origin/master
 			return this.x * this.y
 		}
 	}
