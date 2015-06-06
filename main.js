@@ -37,7 +37,7 @@ function init() { // Main function
 			ctx.rect(0, 0, cW, cH) // Set the canvas background to black
 			ctx.fillStyle = "black"
 			ctx.fill()
-            grid(20)
+			grid(20)
 			ctx.drawImage(img, newX, newY)
 			return this.x * this.y
 		}
