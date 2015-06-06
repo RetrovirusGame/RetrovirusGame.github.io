@@ -2,11 +2,14 @@ function init() { // Main function
 	// ========== VARIABLE INITIATION v ==========
 	var c = document.getElementById("retrovirus"), // Access the canvas
 		vImg = document.getElementById("vImg"), // Virus's image
-        abImg1 = document.getElementById("abImg1"),
-        abImg2 = document.getElementById("abImg2"),
-        abImg3 = document.getElementById("abImg3"), // Antibodys are a little redundant, but i can't get around it
-        abImg4 = document.getElementById("abImg4"),
-        abImg5 = document.getElementById("abImg5"),
+        	abImg1 = document.getElementById("abImg1"),
+        	abImg2 = document.getElementById("abImg2"),
+        	abImg3 = document.getElementById("abImg3"), // Antibodys are a little redundant, but i can't get around it
+        	abImg4 = document.getElementById("abImg4"),
+        	abImg5 = document.getElementById("abImg5"),
+        	abCount = 5;
+        	numbers[], // Possible array fix
+        	abImg[], // Possible array fix
 		ctx = c.getContext("2d"), // 2D Canvas context
 		height = window.innerHeight, // Shortcut to window.innerHeight
 		width = window.innerWidth, // Shortcut to window.innerWidth
@@ -16,6 +19,12 @@ function init() { // Main function
 		cH, // Shortcut to the canvas's height
 		gridH, // For accessing movement distance/grid height
 		gridW // For accessing movement distance/grid width
+		
+		for (i = 0; i < abCount, i++) {
+			var j = i + 1
+			numbers.push[j.toString()]
+			abImg[i + 1] = document.getElemenById("abImg" + numbers[i])
+		}
  	
 	// ========== VARIABLE INITIATION ^ ==========
  	
@@ -41,13 +50,11 @@ function init() { // Main function
 			ctx.clearRect(0, 0, cW, cH)
 			ctx.rect(0, 0, cW, cH) // Set the canvas background to black
 			ctx.fillStyle = "black"
-            ctx.fill()
+			ctx.fill()
 			ctx.drawImage(vImg, newX, newY)
-            antibody1.render()
-            antibody2.render()
-            antibody3.render()
-            antibody4.render()
-            antibody5.render()
+			for (i = 0; i < abCount; i++) {
+				antibody[i + 1].render(i + 1)
+			}
 			return this.x * this.y
 		}
 	}
@@ -58,11 +65,10 @@ function init() { // Main function
     }
 	
 	var virus = new RetroVirus() // Create new virus with constructor
-    var antibody1 = new Antibody()
-    var antibody2 = new Antibody()
-    var antibody3 = new Antibody()
-    var antibody4 = new Antibody()
-    var antibody5 = new Antibody()
+	var antibody[]
+	for (i = 0; i < abCount; i++)
+		antibody[i + 1] = new Antibody()
+	}
 	
 	// ========== CLASSES ^ ==========
     	
@@ -88,7 +94,7 @@ function init() { // Main function
 				pos = gridW * i
 				ctx.moveTo(pos, 0)
 				ctx.lineTo(pos, cH)
-                // ctx.strokeStyle = "white"
+				// ctx.strokeStyle = "white"
 				ctx.stroke()
 			}
 
@@ -98,7 +104,7 @@ function init() { // Main function
 				ctx.moveTo(0, pos)
 				ctx.lineTo(cW, pos)
 				// ctx.strokeStyle = "white"
-                ctx.stroke()
+				ctx.stroke()
 			}
 		}
 
@@ -109,115 +115,95 @@ function init() { // Main function
 		virus.x = centerW // Set the virus's starting position
 		virus.y = centerH // - gridH / 2 // To offset image for collision
 		
-        antibody1.x = gridW * 3
-        antibody1.y = gridW * 6
+		// We'll let this fly for now
+		
+		antibody[1].x = gridW * 3
+		antibody[1].y = gridW * 6
+		
+		antibody[2].x = gridW * 15
+		antibody[2].y = gridW * 4
+		
+		antibody[3].x = gridW * 7
+		antibody[3].y = gridW * 5
+		
+		antibody[4].x = gridW * 9
+		antibody[4].y = gridW * 2
+		
+		antibody[5].x = gridW * 8
+		antibody[5].y = gridW * 9
 
-        antibody2.x = gridW * 15
-        antibody2.y = gridW * 4
+		antibody.move = function(newX, newY) {
+			ctx.clearRect(0, 0, cW, cH)
+			ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+			ctx.fillStyle = "black"
+			ctx.fill()
+			for(i = 0; i < abCount; i++) {
+				ctx.drawImage(abImg[i + 1], newX, newY)
+			}
+			virus.render()
+			return this.x * this.y 
+		}
 
-        antibody3.x = gridW * 7
-        antibody3.y = gridW * 5
-        
-        antibody4.x = gridW * 9
-        antibody4.y = gridW * 2
+        // antibody2.move = function(newX, newY) {
+        //     ctx.clearRect(0, 0, cW, cH)
+        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+        //     ctx.fillStyle = "black"
+        //     ctx.fill()
+        //     ctx.drawImage(abImg2, newX, newY)
+        //     virus.render()
+        //     antibody1.render()
+        //     antibody3.render()
+        //     antibody4.render()
+        //     antibody5.render()
+        //     return this.x * this.y 
+        // }
 
-        antibody5.x = gridW * 8
-        antibody5.y = gridW * 9
+        // antibody3.move = function(newX, newY) {
+        //     ctx.clearRect(0, 0, cW, cH)
+        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+        //     ctx.fillStyle = "black"
+        //     ctx.fill()
+        //     ctx.drawImage(abImg3, newX, newY)
+        //     virus.render()
+        //     antibody1.render()
+        //     antibody2.render()
+        //     antibody4.render()
+        //     antibody5.render()
+        //     return this.x * this.y 
+        // }
 
-        antibody1.move = function(newX, newY) {
-            ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
-            ctx.drawImage(abImg1, newX, newY)
-            virus.render()
-            antibody2.render()
-            antibody3.render()
-            antibody4.render()
-            antibody5.render()
-            return this.x * this.y 
-        }
+        // antibody4.move = function(newX, newY) {
+        //     ctx.clearRect(0, 0, cW, cH)
+        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+        //     ctx.fillStyle = "black"
+        //     ctx.fill()
+        //     ctx.drawImage(abImg4, newX, newY)
+        //     virus.render()
+        //     antibody1.render()
+        //     antibody2.render()
+        //     antibody3.render()
+        //     antibody5.render()
+        //     return this.x * this.y 
+        // }
 
-        antibody2.move = function(newX, newY) {
-            ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
-            ctx.drawImage(abImg2, newX, newY)
-            virus.render()
-            antibody1.render()
-            antibody3.render()
-            antibody4.render()
-            antibody5.render()
-            return this.x * this.y 
-        }
+        // antibody5.move = function(newX, newY) {
+        //     ctx.clearRect(0, 0, cW, cH)
+        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+        //     ctx.fillStyle = "black"
+        //     ctx.fill()
+        //     ctx.drawImage(abImg5, newX, newY)
+        //     virus.render()
+        //     antibody1.render()
+        //     antibody2.render()
+        //     antibody3.render()
+        //     antibody4.render()
+        //     return this.x * this.y 
+        // }
 
-        antibody3.move = function(newX, newY) {
-            ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
-            ctx.drawImage(abImg3, newX, newY)
-            virus.render()
-            antibody1.render()
-            antibody2.render()
-            antibody4.render()
-            antibody5.render()
-            return this.x * this.y 
-        }
-
-        antibody4.move = function(newX, newY) {
-            ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
-            ctx.drawImage(abImg4, newX, newY)
-            virus.render()
-            antibody1.render()
-            antibody2.render()
-            antibody3.render()
-            antibody5.render()
-            return this.x * this.y 
-        }
-
-        antibody5.move = function(newX, newY) {
-            ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
-            ctx.drawImage(abImg5, newX, newY)
-            virus.render()
-            antibody1.render()
-            antibody2.render()
-            antibody3.render()
-            antibody4.render()
-            return this.x * this.y 
-        }
-
-        antibody1.render = function() {
-            ctx.drawImage(abImg1, antibody1.x, antibody1.y)
-            return abImg1
-        }
-
-        antibody2.render = function() {
-            ctx.drawImage(abImg2, antibody2.x, antibody2.y)
-            return abImg2
-        }
-
-        antibody3.render = function() {
-            ctx.drawImage(abImg3, antibody3.x, antibody3.y)
-            return abImg3
-        }
-
-        antibody4.render = function() {
-            ctx.drawImage(abImg4, antibody4.x, antibody4.y)
-            return abImg4
-        }
-
-        antibody5.render = function() {
-            ctx.drawImage(abImg5, antibody5.x, antibody5.y)
-            return abImg5
-        }
+		antibody.render = function(toRender) {
+			ctx.drawImage(abImg[toRender], antibody[toRender].x, antibody[toRender].y)
+			return abImg[toRender]
+		}
 
 		virus.render = function() {
 			ctx.drawImage(vImg, virus.x, virus.y)
@@ -236,99 +222,24 @@ function init() { // Main function
 	
 	// ========== CRUCIAL FUNDEMENTALS v ==========
 	
-    setInterval(function() {
-            if (antibody1.x - virus.x > 0 && antibody1.x - virus.x > antibody1.y - virus.y)  {
-                antibody1.move(antibody1.x -= gridW, antibody1.y)
-            }
-
-            else if (antibody1.y - virus.y < 0 && antibody1.y - virus.y < antibody1.x - virus.x) {
-                antibody1.move(antibody1.x, antibody1.y += gridW)
-            }
-
-            else if (antibody1.x - virus.x < 0 && antibody1.x - virus.x < antibody1.y - virus.y) {
-                antibody1.move(antibody1.x += gridW, antibody1.y)
-            }
-
-            else if (antibody1.y - virus.y > 0 && antibody1.y - virus.y > antibody1.x - virus.x) {
-                antibody1.move(antibody1.x, antibody1.y -= gridW)
-            }
-
-    }, 500)
-
-    setInterval(function() {
-            if (antibody2.x - virus.x > 0 && antibody2.x - virus.x > antibody2.y - virus.y) {
-                antibody2.move(antibody2.x -= gridW, antibody2.y)
-            }
-
-            else if (antibody2.y - virus.y < 0 && antibody2.y - virus.y < antibody2.x - virus.x) {
-                antibody2.move(antibody2.x, antibody2.y += gridW)
-            }
-
-            else if (antibody2.x - virus.x < 0 && antibody2.x - virus.x < antibody2.y - virus.y) {
-                antibody2.move(antibody2.x += gridW, antibody2.y)
-            }
-
-            else if (antibody2.y - virus.y > 0 && antibody2.y - virus.y > antibody2.x - virus.x) {
-                antibody2.move(antibody2.x, antibody2.y -= gridW)
-            }
-
-    }, 500)
-
-    setInterval(function() {
-            if (antibody3.x - virus.x > 0 && antibody3.x - virus.x > antibody3.y - virus.y) {
-                antibody3.move(antibody3.x -= gridW, antibody3.y)
-            }
-
-            else if (antibody3.y - virus.y < 0 && antibody3.y - virus.y < antibody3.x - virus.x) {
-                antibody3.move(antibody3.x, antibody3.y += gridW)
-            }
-
-            else if (antibody3.x - virus.x < 0 && antibody3.x - virus.x < antibody3.y - virus.y) {
-                antibody3.move(antibody3.x += gridW, antibody3.y)
-            }
-
-            else if (antibody3.y - virus.y > 0 && antibody3.y - virus.y > antibody3.x - virus.x) {
-                antibody3.move(antibody3.x, antibody3.y -= gridW)
-            }
-
-    }, 500)
-
-    setInterval(function() {
-            if (antibody4.x - virus.x > 0 && antibody4.x - virus.x > antibody4.y - virus.y) {
-                antibody4.move(antibody4.x -= gridW, antibody4.y)
-            }
-
-            else if (antibody4.y - virus.y < 0 && antibody4.y - virus.y < antibody4.x - virus.x) {
-                antibody4.move(antibody4.x, antibody4.y += gridW)
-            }
-
-            else if (antibody4.x - virus.x < 0 && antibody4.x - virus.x < antibody4.y - virus.y) {
-                antibody4.move(antibody4.x += gridW, antibody4.y)
-            }
-
-            else if (antibody4.y - virus.y > 0 && antibody4.y - virus.y > antibody4.x - virus.x) {
-                antibody4.move(antibody4.x, antibody4.y -= gridW)
-            }
-
-    }, 500)
-
-    setInterval(function() {
-            if (antibody5.x - virus.x > 0 && antibody5.x - virus.x > antibody5.y - virus.y) {
-                antibody5.move(antibody5.x -= gridW, antibody5.y)
-            }
-
-            else if (antibody5.y - virus.y < 0 && antibody5.y - virus.y < antibody5.x - virus.x) {
-                antibody5.move(antibody5.x, antibody5.y += gridW)
-            }
-
-            else if (antibody5.x - virus.x < 0 && antibody5.x - virus.x < antibody5.y - virus.y) {
-                antibody5.move(antibody5.x += gridW, antibody5.y)
-            }
-
-            else if (antibody5.y - virus.y > 0 && antibody5.y - virus.y > antibody5.x - virus.x) {
-                antibody5.move(antibody5.x, antibody5.y -= gridW)
-            }
-
+	setInterval(function() {
+		for(i = 0; i < abCount; i++) {
+			if (antibody[i + 1].x - virus.x > 0 && antibody[i + 1].x - virus.x > antibody[i + 1].y - virus.y)  {
+				antibody[i + 1].move(antibody[i + 1].x -= gridW, antibody[i + 1].y)
+			}
+		
+			else if (antibody[i + 1].y - virus.y < 0 && antibody[i + 1].y - virus.y < antibody[i + 1].x - virus.x) {
+				antibody[i + 1].move(antibody[i + 1].x, antibody[i + 1].y += gridW)
+			}
+			
+			else if (antibody[i + 1].x - virus.x < 0 && antibody[i + 1].x - virus.x < antibody[i + 1].y - virus.y) {
+				antibody[i + 1].move(antibody[i + 1].x += gridW, antibody[i + 1].y)
+			}
+			
+			else if (antibody[i + 1].y - virus.y > 0 && antibody[i + 1].y - virus.y > antibody[i + 1].x - virus.x) {
+				antibody[i + 1].move(antibody[I + 1].x, antibody[i + 1].y -= gridW)
+			}
+		}
     }, 500)
 
 	window.addEventListener("keydown", function(event) { // Key listener
@@ -366,14 +277,12 @@ function init() { // Main function
 				break
 			}
 	}, false)
-
-    window.addEventListener("load", function () {
-        virus.render()
-        antibody1.render()
-        antibody2.render()
-        antibody3.render()
-        antibody4.render()
-        antibody5.render()
+	
+	window.addEventListener("load", function () {
+		virus.render()
+		for(i = 0; i < abCount; i++) {
+			antibody[i + 1].render()
+		}
     }, false)
 	
 	// ========== CRUCIAL FUNDEMENTALS ^ ==========
