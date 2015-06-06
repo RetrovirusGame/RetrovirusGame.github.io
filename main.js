@@ -132,7 +132,7 @@ function init() { // Main function
 		antibody[5].x = gridW * 8
 		antibody[5].y = gridW * 9
 
-		Antibody.move = function(newX, newY) {
+		Antibody.prototype.move = function(newX, newY) {
 			ctx.clearRect(0, 0, cW, cH)
 			ctx.rect(0, 0, cW, cH) // Set the canvas background to black
 			ctx.fillStyle = "black"
@@ -144,12 +144,12 @@ function init() { // Main function
 			return this.x * this.y 
 		}
 		
-		Antibody.render = function(toRender) {
+		Antibody.prototype.render = function(toRender) {
 			ctx.drawImage(abImg[toRender], antibody[toRender].x, antibody[toRender].y)
 			return abImg[toRender]
 		}
 
-		virus.render = function() {
+		Virus.prototype.render = function() {
 			ctx.drawImage(vImg, virus.x, virus.y)
 			return vImg
 		}
