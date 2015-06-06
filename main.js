@@ -59,14 +59,14 @@ function init() { // Main function
 		}
 	}
 
-    var Antibody = function(x, y) {
-        this.x = x
-        this.y = y
-    }
+	var Antibody = function(x, y) {
+		this.x = x
+		this.y = y
+	}
 	
 	var virus = new RetroVirus() // Create new virus with constructor
 	var antibody = []
-	for (i = 0; i < abCount; i++)
+	for (i = 0; i < abCount; i++) {
 		antibody[i + 1] = new Antibody()
 	}
 	
@@ -143,63 +143,7 @@ function init() { // Main function
 			virus.render()
 			return this.x * this.y 
 		}
-
-        // antibody2.move = function(newX, newY) {
-        //     ctx.clearRect(0, 0, cW, cH)
-        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-        //     ctx.fillStyle = "black"
-        //     ctx.fill()
-        //     ctx.drawImage(abImg2, newX, newY)
-        //     virus.render()
-        //     antibody1.render()
-        //     antibody3.render()
-        //     antibody4.render()
-        //     antibody5.render()
-        //     return this.x * this.y 
-        // }
-
-        // antibody3.move = function(newX, newY) {
-        //     ctx.clearRect(0, 0, cW, cH)
-        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-        //     ctx.fillStyle = "black"
-        //     ctx.fill()
-        //     ctx.drawImage(abImg3, newX, newY)
-        //     virus.render()
-        //     antibody1.render()
-        //     antibody2.render()
-        //     antibody4.render()
-        //     antibody5.render()
-        //     return this.x * this.y 
-        // }
-
-        // antibody4.move = function(newX, newY) {
-        //     ctx.clearRect(0, 0, cW, cH)
-        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-        //     ctx.fillStyle = "black"
-        //     ctx.fill()
-        //     ctx.drawImage(abImg4, newX, newY)
-        //     virus.render()
-        //     antibody1.render()
-        //     antibody2.render()
-        //     antibody3.render()
-        //     antibody5.render()
-        //     return this.x * this.y 
-        // }
-
-        // antibody5.move = function(newX, newY) {
-        //     ctx.clearRect(0, 0, cW, cH)
-        //     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-        //     ctx.fillStyle = "black"
-        //     ctx.fill()
-        //     ctx.drawImage(abImg5, newX, newY)
-        //     virus.render()
-        //     antibody1.render()
-        //     antibody2.render()
-        //     antibody3.render()
-        //     antibody4.render()
-        //     return this.x * this.y 
-        // }
-
+		
 		antibody.render = function(toRender) {
 			ctx.drawImage(abImg[toRender], antibody[toRender].x, antibody[toRender].y)
 			return abImg[toRender]
@@ -240,7 +184,7 @@ function init() { // Main function
 				antibody[i + 1].move(antibody[I + 1].x, antibody[i + 1].y -= gridW)
 			}
 		}
-    }, 500)
+	}, 500)
 
 	window.addEventListener("keydown", function(event) { // Key listener
 		switch (event.keyCode) {
@@ -283,7 +227,7 @@ function init() { // Main function
 		for(i = 0; i < abCount; i++) {
 			antibody[i + 1].render()
 		}
-    }, false)
+	}, false)
 	
 	// ========== CRUCIAL FUNDEMENTALS ^ ==========
 }
