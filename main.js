@@ -65,7 +65,7 @@ function init() { // Main function
     }
 	
 	var virus = new RetroVirus() // Create new virus with constructor
-	var antibody[]
+	var antibody = []
 	for (i = 0; i < abCount; i++)
 		antibody[i + 1] = new Antibody()
 	}
