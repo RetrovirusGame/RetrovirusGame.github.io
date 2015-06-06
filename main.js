@@ -1,7 +1,9 @@
 function init() { // Main function
 	// ========== VARIABLE INITIATION v ==========
 	var c = document.getElementById("retrovirus"), // Access the canvas
-		img = document.getElementById("img"), // Virus's image
+		vImg = document.getElementById("vImg"), // Virus's image
+        abImg1 = document.getElementById("abImg1"),
+        abImg2 = document.getElementById("abImg2"),
 		ctx = c.getContext("2d"), // 2D Canvas context
 		height = window.innerHeight, // Shortcut to window.innerHeight
 		width = window.innerWidth, // Shortcut to window.innerWidth
@@ -14,7 +16,7 @@ function init() { // Main function
  	
 	// ========== VARIABLE INITIATION ^ ==========
  	
-	// ========== GLOBAL FUNCTIONS v ==========
+	// ========== GLOBAL FUNCTIONS v =============
 
 	function writeText(text) { // Text writing function
 		ctx.textAlign = "center"
@@ -36,14 +38,22 @@ function init() { // Main function
 			ctx.clearRect(0, 0, cW, cH)
 			ctx.rect(0, 0, cW, cH) // Set the canvas background to black
 			ctx.fillStyle = "black"
-			ctx.fill()
-            grid(20)
-			ctx.drawImage(img, newX, newY)
+            ctx.fill()
+			ctx.drawImage(vImg, newX, newY)
+            antibody1.render()
+            antibody2.render()
 			return this.x * this.y
 		}
 	}
+
+    var Antibody = function(x, y) {
+        this.x = x
+        this.y = y
+    }
 	
 	var virus = new RetroVirus() // Create new virus with constructor
+    var antibody1 = new Antibody()
+    var antibody2 = new Antibody()
 	
 	// ========== CLASSES ^ ==========
     	
@@ -69,6 +79,7 @@ function init() { // Main function
 				pos = gridW * i
 				ctx.moveTo(pos, 0)
 				ctx.lineTo(pos, cH)
+                //ctx.strokeStyle = "white"
 				ctx.stroke()
 			}
 
@@ -77,7 +88,8 @@ function init() { // Main function
 				pos = gridH * i
 				ctx.moveTo(0, pos)
 				ctx.lineTo(cW, pos)
-				ctx.stroke()
+				//ctx.strokeStyle = "white"
+                ctx.stroke()
 			}
 		}
 
@@ -86,14 +98,50 @@ function init() { // Main function
 		grid(20) // 20 squares across
 		
 		virus.x = centerW // Set the virus's starting position
-		virus.y = centerH - gridH / 2 // To offset image for collision
+		virus.y = centerH // - gridH / 2 // To offset image for collision
 		
+        antibody1.x = 100
+        antibody1.y = 100
+
+        antibody2.x = 200
+        antibody2.y = 500
+
+        antibody1.move = function(newX, newY) {
+            ctx.clearRect(0, 0, cW, cH)
+            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+            ctx.fillStyle = "black"
+            ctx.fill()
+            ctx.drawImage(abImg1, newX, newY)
+            virus.render()
+            antibody2.render()
+            return this.x * this.y 
+        }
+
+        antibody2.move = function(newX, newY) {
+            ctx.clearRect(0, 0, cW, cH)
+            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+            ctx.fillStyle = "black"
+            ctx.fill()
+            ctx.drawImage(abImg2, newX, newY)
+            virus.render()
+            antibody1.render()
+            return this.x * this.y 
+        }
+
+        antibody1.render = function() {
+            ctx.drawImage(abImg1, antibody1.x, antibody1.y)
+            return abImg1
+        }
+
+        antibody2.render = function() {
+            ctx.drawImage(abImg2, antibody2.x, antibody2.y)
+            return abImg2
+        }
+
 		virus.render = function() {
-			ctx.drawImage(img, virus.x, virus.y)
-			return img
+			ctx.drawImage(vImg, virus.x, virus.y)
+			return vImg
 		}
-		
-		virus.render()
 	
 		ctx.rect(0, 0, cW, cH) // Set the canvas background to black
 		ctx.fillStyle = "black"
@@ -107,6 +155,50 @@ function init() { // Main function
 	
 	// ========== CRUCIAL FUNDEMENTALS v ==========
 	
+    setInterval(function() {
+            if (antibody1.x - virus.x > 0 && antibody1.x - virus.x > antibody1.y - virus.y) {
+                antibody1.move(antibody1.x -= gridW, antibody1.y)
+            }
+
+            else if (antibody1.y - virus.y < 0 && antibody1.y - virus.y < antibody1.x - virus.x) {
+                antibody1.move(antibody1.x, antibody1.y += gridW)
+            }
+
+            else if (antibody1.x - virus.x < 0 && antibody1.x - virus.x < antibody1.y - virus.y) {
+                antibody1.move(antibody1.x += gridW, antibody1.y)
+            }
+
+            else if (antibody1.y - virus.y > 0 && antibody1.y - virus.y > antibody1.x - virus.x) {
+                antibody1.move(antibody1.x, antibody1.y -= gridW)
+            }
+
+            else {
+                antibody1.move(antibody1.x += gridW, antibody1.y)
+            }
+    }, 1000)
+
+    setInterval(function() {
+            if (antibody2.x - virus.x > 0 && antibody2.x - virus.x > antibody2.y - virus.y) {
+                antibody2.move(antibody2.x -= gridW, antibody2.y)
+            }
+
+            else if (antibody2.y - virus.y < 0 && antibody2.y - virus.y < antibody2.x - virus.x) {
+                antibody2.move(antibody2.x, antibody2.y += gridW)
+            }
+
+            else if (antibody2.x - virus.x < 0 && antibody2.x - virus.x < antibody2.y - virus.y) {
+                antibody2.move(antibody2.x += gridW, antibody2.y)
+            }
+
+            else if (antibody2.y - virus.y > 0 && antibody2.y - virus.y > antibody2.x - virus.x) {
+                antibody2.move(antibody2.x, antibody2.y -= gridW)
+            }
+
+            else {
+                antibody2.move(antibody2.x += gridW, antibody2.y)
+            }
+    }, 1000)
+
 	window.addEventListener("keydown", function(event) { // Key listener
 		switch (event.keyCode) {
 			case 37: // Left
@@ -144,8 +236,10 @@ function init() { // Main function
 	}, false)
 
     window.addEventListener("load", function () {
-        ctx.drawImage(img, virus.x, virus.y) 
-    }, false);
+        virus.render()
+        antibody1.render()
+        antibody2.render()
+    }, false)
 	
 	// ========== CRUCIAL FUNDEMENTALS ^ ==========
 }
