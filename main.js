@@ -19,7 +19,7 @@ function init() { // Main function
 		cH, // Shortcut to the canvas's height
 		gridH, // For accessing movement distance/grid height
 		gridW // For accessing movement distance/grid width
-		
+			
 	for (i = 0; i < abCount; i++) {
 		var j = i + 1
 		numbers.push[j.toString()]
