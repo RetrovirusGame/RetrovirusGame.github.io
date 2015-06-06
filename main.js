@@ -8,8 +8,8 @@ function init() { // Main function
         	abImg4 = document.getElementById("abImg4"),
         	abImg5 = document.getElementById("abImg5"),
         	abCount = 5;
-        	numbers[], // Possible array fix
-        	abImg[], // Possible array fix
+        	numbers = [], // Possible array fix
+        	abImg = [], // Possible array fix
 		ctx = c.getContext("2d"), // 2D Canvas context
 		height = window.innerHeight, // Shortcut to window.innerHeight
 		width = window.innerWidth, // Shortcut to window.innerWidth
