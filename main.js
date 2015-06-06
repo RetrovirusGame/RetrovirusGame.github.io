@@ -43,11 +43,11 @@ function init() { // Main function
 		gridH, // For accessing movement distance/grid height
 		gridW // For accessing movement distance/grid width
 			
-	for (i = 0; i < abCount; i++) {
-		var j = i + 1
-		numbers.push[j.toString()]
-		abImg[i + 1] = document.getElemenById("abImg" + numbers[i])
-	}
+		for (i = 0; i < abCount; i++) {
+			var j = i + 1
+			numbers.push[j.toString()]
+			abImg[i + 1] = document.getElementById("abImg" + numbers[i])
+		}
  	
 	// ========== VARIABLE INITIATION ^ ==========
  	
