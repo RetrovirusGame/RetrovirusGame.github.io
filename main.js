@@ -181,7 +181,7 @@ function init() { // Main function
 			}
 			
 			else if (antibody[i + 1].y - virus.y > 0 && antibody[i + 1].y - virus.y > antibody[i + 1].x - virus.x) {
-				antibody[i + 1].move(antibody[I + 1].x, antibody[i + 1].y -= gridW)
+				antibody[i + 1].move(antibody[i + 1].x, antibody[i + 1].y -= gridW)
 			}
 		}
 	}, 500)
@@ -225,7 +225,7 @@ function init() { // Main function
 	window.addEventListener("load", function () {
 		virus.render()
 		for(i = 0; i < abCount; i++) {
-			antibody[i + 1].render()
+			antibody[i + 1].render(i + 1)
 		}
 	}, false)
 	
