@@ -18,15 +18,13 @@ function init() { // Main function
 		cW, // Shortcut to the canvas's width
 		cH, // Shortcut to the canvas's height
 		gridH, // For accessing movement distance/grid height
-		gridW, // For accessing movement distance/grid width
+		gridW // For accessing movement distance/grid width
 		
-		abInit = function() {
-			for (i = 0; i < abCount, i++) {
-				var j = i + 1
-				numbers.push[j.toString()]
-				abImg[i + 1] = document.getElemenById("abImg" + numbers[i])
-			}
-		}
+	for (i = 0; i < abCount; i++) {
+		var j = i + 1
+		numbers.push[j.toString()]
+		abImg[i + 1] = document.getElemenById("abImg" + numbers[i])
+	}
  	
 	// ========== VARIABLE INITIATION ^ ==========
  	
