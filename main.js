@@ -2,7 +2,6 @@ function init() { // Main function
 	// ========== VARIABLE INITIATION v ==========
 	var c = document.getElementById("retrovirus"), // Access the canvas
 		vImg = document.getElementById("vImg"), // Virus's image
-<<<<<<< HEAD
         	abImg1 = document.getElementById("abImg1"),
         	abImg2 = document.getElementById("abImg2"),
         	abImg3 = document.getElementById("abImg3"), // Antibodys are a little redundant, but i can't get around it
@@ -11,13 +10,11 @@ function init() { // Main function
         	abCount = 5,
         	numbers = [], // Possible array fix
         	abImg = [], // Possible array fix
-=======
         abImg1 = document.getElementById("abImg1"),
         abImg2 = document.getElementById("abImg2"),
         abImg3 = document.getElementById("abImg3"),
         abImg4 = document.getElementById("abImg4"),
         abImg5 = document.getElementById("abImg5"),
->>>>>>> parent of 6d02f8e... fix
 		ctx = c.getContext("2d"), // 2D Canvas context
 		height = window.innerHeight, // Shortcut to window.innerHeight
 		width = window.innerWidth, // Shortcut to window.innerWidth
