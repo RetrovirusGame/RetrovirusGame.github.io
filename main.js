@@ -157,7 +157,7 @@ function init() { // Main function
 			return abImg[toRender]
 		}
 
-		RetroVirus.prototype.render = function() {
+		Virus.prototype.render = function() {
 			ctx.drawImage(vImg, virus.x, virus.y)
 			return vImg
 		}
