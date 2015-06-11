@@ -154,20 +154,20 @@ function init() { // Main function
     virus.x = centerW // Set the virus's starting position
     virus.y = centerH - gridH / 2 // To offset image for collision
 
-    antiArray[0].x = gridW * 3 // set the starting positions of antibodies
-    antiArray[0].y = gridW * 6
+    antiArray[0].x = gridW * 3 + gridW / 2// set the starting positions of antibodies
+    antiArray[0].y = gridH * 6 + gridH / 2
 
-    antiArray[1].x = gridW * 15
-    antiArray[1].y = gridW * 4
+    antiArray[1].x = gridW * 15 + gridW / 2
+    antiArray[1].y = gridH * 4 + gridH / 2
 
-    antiArray[2].x = gridW * 7
-    antiArray[2].y = gridW * 5
+    antiArray[2].x = gridW * 7 + gridW / 2
+    antiArray[2].y = gridH * 5 + gridH / 2
 
-    antiArray[3].x = gridW * 9
-    antiArray[3].y = gridW * 2
+    antiArray[3].x = gridW * 9 + gridW / 2
+    antiArray[3].y = gridH * 2 + gridH / 2
 
-    antiArray[4].x = gridW * 8
-    antiArray[4].y = gridW * 9
+    antiArray[4].x = gridW * 8 + gridW / 2
+    antiArray[4].y = gridH * 9 + gridH / 2
 
     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
     ctx.fillStyle = "black"
