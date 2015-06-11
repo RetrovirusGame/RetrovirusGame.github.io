@@ -133,15 +133,6 @@ function init() { // Main function
 
         track: function (v) { // antibody AI
 
-            var listenSpace = function () {
-                window.addEventListener("keydown", function (event) {
-                    if (event.keyCode == 32) {
-                        console.log(this.x + ", " + this.y)
-                        console.log(Math.round(v.x) + ", " + Math.round(v.y))
-                    }
-                }, false)
-            }
-
             if (this.x - v.x > 0 && this.x - v.x > this.y - v.y) {
                 this.move(this.x -= gridW, this.y)
             } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
@@ -198,30 +189,37 @@ function init() { // Main function
     /////////////////// EVENT LISTENERS ///////////////////
 
     setInterval(function () { // allow antibody to track the virus every 500 milliseconds
-        antiArray[0].track(virus)
-    }, 500)
+        var computeX = function (abArray) { // Solve for the x value
+            return Math.round((abArray.x - (gridW / 2 - 1)) - 1)
+        }
 
-    setInterval(function () {
-        antiArray[1].track(virus)
-    }, 500)
+        var computeY = function (abArray) { // Solve for the y value
+            return Math.round((abArray.y - (gridH / 2 - 10)) - 1)
+        }
 
-    setInterval(function () {
-        antiArray[2].track(virus)
-    }, 500)
+        var xFormulaArray = [numAnti], // Array for all of the x formulas
+            yFormulaArray = [numAnti] // Array for all of the y formulas
 
-    setInterval(function () {
-        antiArray[3].track(virus)
-    }, 500)
+        for (var i = 0; i < numAnti; i++) { // Assign the x formulas
+            xFormulaArray[i] = computeX(antiArray[i])
+        }
 
-    setInterval(function () {
-        antiArray[4].track(virus)
-    }, 500)
+        for (var i = 0; i < numAnti; i++) { // Assign the y formulas
+            yFormulaArray[i] = computeY(antiArray[i])
+        }
 
-    /* for (var i in antiArray) {
-     setInterval(function() {
-     antiArray[i].track(virus)
-     }, 500)
-     } */
+        var xForumla = Math.round((antiArray[0].x - (gridW / 2 - 1)) - 1) // IMPORTANT FORMULA
+        var yFormula = Math.round((antiArray[0].y - (gridH / 2 - 10)) - 1) // IMPORTANT FORMULA
+
+        for (var i = 0; i < numAnti; i++) {
+            if (Math.abs(xFormulaArray[i] - virus.x) <= (gridW / 2 - 2) && Math.abs(yFormulaArray[i] - virus.y) <= (gridH / 2 - 2)) { // Margin of error
+                virus.health -= 1
+                console.log(virus.health)
+            } else {
+                antiArray[i].track(virus)
+            }
+        }
+    }, 500)
 
     // not sure why this doesn't work ^^ ill try to fix it later
 
@@ -259,36 +257,7 @@ function init() { // Main function
             case 32: // Space
                 // To sum it up, I found the formula that checks if the antibody is in the same position as the virus.
 
-                var computeX = function (abArray) { // Solve for the x value
-                    return Math.round((abArray.x - (gridW / 2 - 1)) - 1)
-                }
-
-                var computeY = function (abArray) { // Solve for the y value
-                    return Math.round((abArray.y - (gridH / 2 - 10)) - 1)
-                }
-
-                var xFormulaArray = [numAnti], // Array for all of the x formulas
-                    yFormulaArray = [numAnti] // Array for all of the y formulas
-
-                for (var i = 0; i < numAnti; i++) { // Assign the x formulas
-                    xFormulaArray[i] = computeX(antiArray[i])
-                }
-
-                for (var i = 0; i < numAnti; i++) { // Assign the y formulas
-                    yFormulaArray[i] = computeY(antiArray[i])
-                }
-
-
-                var xForumla = Math.round((antiArray[0].x - (gridW / 2 - 1)) - 1) // IMPORTANT FORMULA
-                var yFormula = Math.round((antiArray[0].y - (gridH / 2 - 10)) - 1) // IMPORTANT FORMULA
-
-                for (var i = 0; i < numAnti; i++) {
-                    if (Math.abs(xFormulaArray[i] - virus.x) <= (gridW / 2 - 2) && Math.abs(yFormulaArray[i] - virus.y) <= (gridH / 2 - 2)) {
-                        console.log("Check!") // There is a margin of error
-
-                        virus.health -= 1
-                    }
-                }
+                
         }
     }, false)
 
