@@ -1,21 +1,21 @@
 function init() { // Main function
 
     ///////////////// VARIABLE INITIATION /////////////////
-    
-    var c = document.getElementById("retrovirus"),  // Access the canvas
-        numAnti = 5,                                // Number of Antibodies
-        abImgArray = [numAnti],                     // Array of antibody images
-        antiArray = [numAnti],                      // Array of antibodies
-		ctx = c.getContext("2d"),                   // 2D Canvas context
-		height = window.innerHeight,                // Shortcut to window.innerHeight
-		width = window.innerWidth,                  // Shortcut to window.innerWidth
-		centerH,                                    // Center of the canvas's height
-		centerW,                                    // Center of the canvas's width
-		cW,                                         // Shortcut to the canvas's width
-		cH,                                         // Shortcut to the canvas's height
-		gridH,                                      // For accessing movement distance/grid height
-		gridW                                       // For accessing movement distance/grid width
-    
+
+    var c = document.getElementById("retrovirus"), // Access the canvas
+        numAnti = 5,                               // Number of Antibodies
+        abImgArray = [numAnti],                    // Array of antibody images
+        antiArray = [numAnti],                     // Array of antibodies
+        ctx = c.getContext("2d"),                  // 2D Canvas context
+        height = window.innerHeight,               // Shortcut to window.innerHeight
+        width = window.innerWidth,                 // Shortcut to window.innerWidth
+        centerH,                                   // Center of the canvas's height
+        centerW,                                   // Center of the canvas's width
+        cW,                                        // Shortcut to the canvas's width
+        cH,                                        // Shortcut to the canvas's height
+        gridH,                                     // For accessing movement distance/grid height
+        gridW                                      // For accessing movement distance/grid width
+
     c.width = width - 18
     c.height = height - 22
     cW = c.width
@@ -31,7 +31,7 @@ function init() { // Main function
         ctx.fillStyle = "white"
         ctx.fillText(text, centerW, centerH)
     }
-    
+
     function grid(countX) { // Sections where the virus will be
         var pos; // Position to start/end the line
         for (var i = countX - 1; i > 0; i--) {
@@ -42,7 +42,7 @@ function init() { // Main function
             // ctx.strokeStyle = "white"
             ctx.stroke()
         }
-        
+
         for (var i = countX - 1; i > 0; i--) {
             gridH = gridW // Ensure a square
             pos = gridH * i
@@ -52,7 +52,7 @@ function init() { // Main function
             ctx.stroke()
         }
     }
-    
+
     grid(20) // 20 squares across
 
     /////////////////////// CLASSES ///////////////////////
@@ -61,21 +61,22 @@ function init() { // Main function
         this.x = x
         this.y = y
         this.img = img
+        this.health = 20
     }
 
     RetroVirus.prototype = { // Virus prototype functions
-        render : function (x, y) { // draws the virus where it already is, unless otherwise specified
+        render: function (x, y) { // draws the virus where it already is, unless otherwise specified
             if (x === undefined) {
                 x = this.x
             }
-            
+
             if (y === undefined) {
                 y = this.y
             }
-            
+
             ctx.drawImage(this.img, x, y)
         },
-    
+
         move: function (newX, newY) { // move virus to new location
             ctx.clearRect(0, 0, cW, cH)
             ctx.rect(0, 0, cW, cH) // Set the canvas background to black
@@ -104,22 +105,22 @@ function init() { // Main function
         this.y = y
         this.img = img
     }
-    
+
     Antibody.prototype = {
-    
-        render : function (x, y) { // same as other
+
+        render: function (x, y) { // same as other
             if (x === undefined) {
                 x = this.x
             }
-            
+
             if (y === undefined) {
                 y = this.y
             }
-            
+
             ctx.drawImage(this.img, x, y)
         },
-        
-        move : function (newX, newY) { // same as the other one
+
+        move: function (newX, newY) { // same as the other one
             ctx.clearRect(0, 0, cW, cH)
             ctx.rect(0, 0, cW, cH) // Set the canvas background to black
             ctx.fillStyle = "black"
@@ -129,7 +130,7 @@ function init() { // Main function
             virus.render()
             for (var i in antiArray) antiArray[i].render()
         },
-    
+
         track: function (v) { // antibody AI
 
             var listenSpace = function () {
@@ -143,17 +144,11 @@ function init() { // Main function
 
             if (this.x - v.x > 0 && this.x - v.x > this.y - v.y) {
                 this.move(this.x -= gridW, this.y)
-            }
-        
-            else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
+            } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
                 this.move(this.x, this.y += gridH)
-            }
-        
-            else if (this.x - v.x < 0 && this.x - v.x < this.y - v.y) {
+            } else if (this.x - v.x < 0 && this.x - v.x < this.y - v.y) {
                 this.move(this.x += gridW, this.y)
-            }
-        
-            else if (this.y - v.y > 0 && this.y - v.y > this.x - v.x) {
+            } else if (this.y - v.y > 0 && this.y - v.y > this.x - v.x) {
                 this.move(this.x, this.y -= gridH)
             }
 
@@ -166,22 +161,22 @@ function init() { // Main function
     var virus = new RetroVirus() // Create new virus with constructor
     virus.img = document.getElementById("vImg")
 
-    for (var i = 0 ; i < numAnti ; i++) { // fill antibody array
+    for (var i = 0; i < numAnti; i++) { // fill antibody array
         antiArray[i] = new Antibody()
     }
-   
-    for (var i = 0 ; i < numAnti ; i++) { // fill image array
+
+    for (var i = 0; i < numAnti; i++) { // fill image array
         abImgArray[i] = document.getElementById("abImg" + String(i))
     }
-    
-    for (var i = 0 ; i < numAnti ; i++) { // set image elements in antibody array
+
+    for (var i = 0; i < numAnti; i++) { // set image elements in antibody array
         antiArray[i].img = abImgArray[i]
     }
 
     virus.x = centerW // Set the virus's starting position
     virus.y = Math.round(centerH - gridH / 2) // To offset image for collision
 
-    antiArray[0].x = Math.round(gridW * 3 + gridW / 2)// set the starting positions of antibodies
+    antiArray[0].x = Math.round(gridW * 3 + gridW / 2) // set the starting positions of antibodies
     antiArray[0].y = Math.round(gridH * 6 + gridH / 2)
 
     antiArray[1].x = Math.round(gridW * 15 + gridW / 2)
@@ -201,33 +196,33 @@ function init() { // Main function
     ctx.fill()
 
     /////////////////// EVENT LISTENERS ///////////////////
-    
-    setInterval(function() {        // allow antibody to track the virus every 500 milliseconds
+
+    setInterval(function () { // allow antibody to track the virus every 500 milliseconds
         antiArray[0].track(virus)
     }, 500)
-    
-    setInterval(function() {
+
+    setInterval(function () {
         antiArray[1].track(virus)
     }, 500)
-    
-    setInterval(function() {
+
+    setInterval(function () {
         antiArray[2].track(virus)
     }, 500)
-    
-    setInterval(function() {
+
+    setInterval(function () {
         antiArray[3].track(virus)
     }, 500)
-    
-    setInterval(function() {
+
+    setInterval(function () {
         antiArray[4].track(virus)
     }, 500)
-    
+
     /* for (var i in antiArray) {
      setInterval(function() {
      antiArray[i].track(virus)
      }, 500)
      } */
-    
+
     // not sure why this doesn't work ^^ ill try to fix it later
 
     window.addEventListener("keydown", function (event) { // Key listener | Moves virus in specified direction
@@ -241,24 +236,21 @@ function init() { // Main function
                 break
 
             case 38: // Up             
-                if (virus.y - gridH < 0) { }
-                else {
+                if (virus.y - gridH < 0) { } else {
                     virus.move(virus.x, virus.y - gridH)
                     virus.y -= gridH
                 }
                 break
 
             case 39: // Right       
-                if (virus.x + gridW * 2 > cW) { }
-                else {
+                if (virus.x + gridW * 2 > cW) { } else {
                     virus.move(virus.x + gridW, virus.y)
                     virus.x += gridW
                 }
                 break
 
             case 40: // Down
-                if (virus.y + gridH * 2 > cH) { }
-                else {
+                if (virus.y + gridH * 2 > cH) { } else {
                     virus.move(virus.x, virus.y + gridH)
                     virus.y += gridH
                 }
@@ -267,22 +259,22 @@ function init() { // Main function
             case 32: // Space
                 // To sum it up, I found the formula that checks if the antibody is in the same position as the virus.
 
-                var computeX = function (abArray) {
+                var computeX = function (abArray) { // Solve for the x value
                     return Math.round((abArray.x - (gridW / 2 - 1)) - 1)
                 }
 
-                var computeY = function (abArray) {
+                var computeY = function (abArray) { // Solve for the y value
                     return Math.round((abArray.y - (gridH / 2 - 10)) - 1)
                 }
 
-                var xFormulaArray = [numAnti],
-                    yFormulaArray = [numAnti]
+                var xFormulaArray = [numAnti], // Array for all of the x formulas
+                    yFormulaArray = [numAnti] // Array for all of the y formulas
 
-                for (var i = 0; i < numAnti; i++) {
+                for (var i = 0; i < numAnti; i++) { // Assign the x formulas
                     xFormulaArray[i] = computeX(antiArray[i])
                 }
 
-                for (var i = 0; i < numAnti; i++) {
+                for (var i = 0; i < numAnti; i++) { // Assign the y formulas
                     yFormulaArray[i] = computeY(antiArray[i])
                 }
 
@@ -294,13 +286,13 @@ function init() { // Main function
                     if (Math.abs(xFormulaArray[i] - virus.x) <= (gridW / 2 - 2) && Math.abs(yFormulaArray[i] - virus.y) <= (gridH / 2 - 2)) {
                         console.log("Check!") // There is a margin of error
 
-                        // virus.health -= 1
+                        virus.health -= 1
                     }
                 }
         }
     }, false)
 
-    window.addEventListener("load", function () {  // runs when page loads, sets scene
+    window.addEventListener("load", function () { // runs when page loads, sets scene
         virus.render()
         for (var i in antiArray) antiArray[i].render()
     }, false)
