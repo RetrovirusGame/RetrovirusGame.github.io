@@ -152,7 +152,7 @@ function init() { // Main function
     }
 
     virus.x = centerW // Set the virus's starting position
-    virus.y = centerH // - gridH / 2 // To offset image for collision
+    virus.y = centerH - gridH / 2 // To offset image for collision
 
     antiArray[0].x = gridW * 3 // set the starting positions of antibodies
     antiArray[0].y = gridW * 6
