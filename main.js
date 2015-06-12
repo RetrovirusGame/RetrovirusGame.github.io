@@ -14,22 +14,22 @@ function init() { // Main function
         cW,                                        // Shortcut to the canvas's width
         cH,                                        // Shortcut to the canvas's height
         gridH,                                     // For accessing movement distance/grid height
-        gridW                                      // For accessing movement distance/grid width
+        gridW;                                     // For accessing movement distance/grid width
 
-    c.width = width - 18
-    c.height = height - 22
-    cW = c.width
-    cH = c.height
-    centerW = cW / 2
-    centerH = cH / 2
+    c.width = width;
+    c.height = height;
+    cW = c.width;
+    cH = c.height;
+    centerW = cW / 2;
+    centerH = cH / 2;
 
     ////////////////////// FUNCTIONS //////////////////////
 
     function writeText(text) { // Text writing function
-        ctx.textAlign = "center"
-        ctx.font = "12pt ABeeZee"
-        ctx.fillStyle = "white"
-        ctx.fillText(text, centerW, centerH)
+        ctx.textAlign = "center";
+        ctx.font = "12pt ABeeZee";
+        ctx.fillStyle = "white";
+        ctx.fillText(text, centerW, centerH);
     }
 
     function grid(countX) { // Sections where the virus will be
@@ -233,14 +233,14 @@ function init() { // Main function
                 }
                 break
 
-            case 38: // Up             
+            case 38: // Up
                 if (virus.y - gridH < 0) { } else {
                     virus.move(virus.x, virus.y - gridH)
                     virus.y -= gridH
                 }
                 break
 
-            case 39: // Right       
+            case 39: // Right
                 if (virus.x + gridW * 2 > cW) { } else {
                     virus.move(virus.x + gridW, virus.y)
                     virus.x += gridW
@@ -257,14 +257,19 @@ function init() { // Main function
             case 32: // Space
                 // To sum it up, I found the formula that checks if the antibody is in the same position as the virus.
 
-                
+
         }
     }, false)
 
     window.addEventListener("load", function () { // runs when page loads, sets scene
         virus.render()
         for (var i in antiArray) antiArray[i].render()
-    }, false)
+    }, false);
+
+    window.addEventListener('resize', function() {
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+    });
 }
 
 document.addEventListener("DOMContentLoaded", init, false) // Run when the DOM has loaded
