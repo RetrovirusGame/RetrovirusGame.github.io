@@ -198,11 +198,11 @@ function init() { // Main function
 
     setInterval(function () { // allow antibody to track the virus every 500 milliseconds
         var computeX = function (abArray) { // Solve for the x value
-            return Math.round((abArray.x - (gridW / 2 - 1)) - 1);
+            return Math.round(abArray.x - (gridW / 2));
         };
 
         var computeY = function (abArray) { // Solve for the y value
-            return Math.round((abArray.y - (gridH / 2 - 10)) - 1);
+            return Math.round(abArray.y - (gridH / 2));
         };
 
         var xFormulaArray = [numAnti], // Array for all of the x formulas
@@ -216,15 +216,21 @@ function init() { // Main function
             yFormulaArray[i] = computeY(antiArray[i]);
         }
 
-        var xForumla = Math.round((antiArray[0].x - (gridW / 2 - 1)) - 1) // IMPORTANT FORMULA
-        var yFormula = Math.round((antiArray[0].y - (gridH / 2 - 10)) - 1) // IMPORTANT FORMULA
-
         for (var i = 0; i < numAnti; i++) {
-            if (Math.abs(xFormulaArray[i] - virus.x) <= (gridW / 2 - 2) && Math.abs(yFormulaArray[i] - virus.y) <= (gridH / 2 - 2)) { // Margin of error
+            if (Math.abs(xFormulaArray[i] - virus.x) <= gridW / 2 && Math.abs(yFormulaArray[i] - virus.y) <= gridH / 2) { // Margin of error
                 virus.health -= 1;
                 console.log(virus.health);
             } else {
                 antiArray[i].track(virus);
+                if (antiArray[i].x <= 0) {
+                    antiArray[i].x += gridW;
+                } else if (antiArray[i].x > c.width) {
+                    antiyArray[i].x -= gridW;
+                } else if (antiArray[i].y <= 0) {
+                    antiArray[i].y += gridH;
+                } else if (antiArray[i].y > c.height) {
+                    antiArray[i].y -= gridH;
+                }
             }
         }
     }, 500);
