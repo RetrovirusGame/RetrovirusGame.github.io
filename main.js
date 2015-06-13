@@ -84,14 +84,14 @@ function init() { // Main function
             ctx.fill()
             if (newX >= 1 && newY >= 1) {
                 ctx.drawImage(this.img, newX, newY)
+            } else if (newX < 1 && newY < 1) {
+                newX = 1
+                newY = 1
+                ctx.drawImage(this.img, newX, newY)
             } else if (newX < 1) {
                 newX = 1
                 ctx.drawImage(this.img, newX, newY)
             } else if (newY < 1) {
-                newY = 1
-                ctx.drawImage(this.img, newX, newY)
-            } else if (newX < 1 && newY < 1) {
-                newX = 1
                 newY = 1
                 ctx.drawImage(this.img, newX, newY)
             }
@@ -132,7 +132,7 @@ function init() { // Main function
         },
         
         track: function (v) { // antibody AI
-            if (this.x - v.x > 0 && this.x - v.x > this.y - v.y) {
+            if (this.x - v.x > 32 && this.x - v.x > this.y - v.y) {
                 this.move(this.x -= gridW, this.y)
             } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
                 this.move(this.x, this.y += gridH)
