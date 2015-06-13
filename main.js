@@ -14,7 +14,8 @@ function init() { // Main function
         cW,                                        // Shortcut to the canvas's width
         cH,                                        // Shortcut to the canvas's height
         gridH,                                     // For accessing movement distance/grid height
-        gridW;                                     // For accessing movement distance/grid width
+        gridW,                                     // For accessing movement distance/grid width
+        gridCount = 20;                            // Quick access to gridCount
 
     c.width = width;
     c.height = height;
@@ -53,7 +54,7 @@ function init() { // Main function
         }
     }
 
-    grid(20); // 20 squares across
+    grid(gridCount);
 
     /////////////////////// CLASSES ///////////////////////
 
@@ -178,6 +179,16 @@ function init() { // Main function
 
     antiArray[4].x = Math.round(gridW * 8 + gridW / 2);
     antiArray[4].y = Math.round(gridH * 9 + gridH / 2);
+
+    for (var i = 0; i < numAnti; i++) { // in case of antibody starting off screen (Which was happening; doesn't matter now)
+        if (antiArray[i].x > c.width) {
+            antiArray[i].x -= gridW;
+        } else if (antiArray[i].y > c.height) {
+            antiArray[i].y -= gridH;
+        }
+    }
+
+
 
     ctx.rect(0, 0, cW, cH); // Set the canvas background to black
     ctx.fillStyle = "black";
