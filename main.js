@@ -263,10 +263,15 @@ function init() { // Main function
         for (var i in antiArray) antiArray[i].render();
     }, false);
 
-    window.addEventListener('resize', function() {
+    window.addEventListener("resize", function() {
         c.width = window.innerWidth;
         c.height = window.innerHeight;
-    });
+    }, false);
+
+    window.addEventListener("contextmenu", function () { // Upon opening the console
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+    }, false);
 }
 
 document.addEventListener("DOMContentLoaded", init, false); // Run when the DOM has loaded
