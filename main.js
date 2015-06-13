@@ -227,7 +227,25 @@ function init() { // Main function
                 }
                 break
                             
+            case 65: // 'a'
+                if (virus.x - gridW < 0) { return false } // For edge collision
+                else { // Print image at new position
+                    virus.move(virus.x - gridW, virus.y)
+                    virus.x -= gridW
+                    return 37 //Last key
+                }
+                break
+                            
             case 38: // Up
+                if (virus.y - gridH < 0) { return false }
+                else {
+                    virus.move(virus.x, virus.y - gridH)
+                    virus.y -= gridH
+                    return 38
+                }
+                break
+            
+            case 87: // 'w'
                 if (virus.y - gridH < 0) { return false }
                 else {
                     virus.move(virus.x, virus.y - gridH)
@@ -244,8 +262,26 @@ function init() { // Main function
                     return 39
                 }
                 break
+            
+            case 68: // 'd'
+                if (virus.x + gridW * 2 > cW) { return false }
+                else {
+                    virus.move(virus.x + gridW, virus.y)
+                    virus.x += gridW
+                    return 39
+                }
+                break
                             
             case 40: // Down
+                if (virus.y + gridH * 2 > cH) { return false }
+                else {
+                    virus.move(virus.x, virus.y + gridH)
+                    virus.y += gridH
+                    return 40
+                }
+                break
+            
+            case 83: // 's'
                 if (virus.y + gridH * 2 > cH) { return false }
                 else {
                     virus.move(virus.x, virus.y + gridH)
