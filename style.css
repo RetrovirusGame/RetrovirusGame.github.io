@@ -1,9 +1,13 @@
 @font-face {
-  font-family: "ABeeZee";
-  src:  url("ABeeZee-Regular.otf");
+    font-family: "ABeeZee";
+    src:  url("ABeeZee-Regular.otf");
+}
+
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 #retrovirus {
-  margin-top: 11px;
-  margin-left: 9px;
 }
