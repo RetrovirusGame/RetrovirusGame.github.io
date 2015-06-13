@@ -74,7 +74,6 @@ function init() { // Main function
             if (y === undefined) {
                 y = this.y;
             }
-
             ctx.drawImage(this.img, x, y);
         },
 
@@ -101,10 +100,58 @@ function init() { // Main function
         }
     };
 
-    var Antibody = function (x, y, img) { //antibody constructor
+    var Entity = function (x, y, img) {
         this.x = x;
         this.y = y;
         this.img = img;
+    };
+
+    Entity.prototype = {
+
+        render: function (x, y) { // same as other
+            if (x === undefined) {
+                x = this.x;
+            }
+
+            if (y === undefined) {
+                y = this.y;
+            }
+
+            ctx.drawImage(this.img, x, y);
+        },
+
+        move: function (newX, newY) { // same as the other one
+            ctx.clearRect(0, 0, cW, cH);
+            ctx.rect(0, 0, cW, cH); // Set the canvas background to black
+            ctx.fillStyle = "black";
+            ctx.fill();
+            this.x = newX;
+            this.y = newY;
+            virus.render();
+            for (var i in antiArray) antiArray[i].render();
+            return this.x * this.y
+        },
+
+        track: function (v) { // antibody AI
+
+            if (this.x - v.x > 0 && this.x - v.x > this.y - v.y) {
+                this.move(this.x -= gridW, this.y);
+            } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
+                this.move(this.x, this.y += gridH);
+            } else if (this.x - v.x < 0 && this.x - v.x < this.y - v.y) {
+                this.move(this.x += gridW, this.y);
+            } else if (this.y - v.y > 0 && this.y - v.y > this.x - v.x) {
+                this.move(this.x, this.y -= gridH);
+            }
+        },
+    };
+
+
+
+    var Antibody = function (ent) { //antibody constructor
+        this.x = ent.x;
+        this.y = ent.y;
+        this.img = ent.img;
     };
 
     Antibody.prototype = {
@@ -145,13 +192,15 @@ function init() { // Main function
                 this.move(this.x, this.y -= gridH);
             }
         },
-    }
+    };
 
     var virus = new RetroVirus() // Create new virus with constructor
     virus.img = document.getElementById("vImg");
+    var entityArray = [50]; // We can handle 50 npc's for now
 
     for (var i = 0; i < numAnti; i++) { // fill antibody array
-        antiArray[i] = new Antibody();
+        entityArray[i] = new Entity()
+        antiArray[i] = new Antibody(entityArray[i]);
     }
 
     for (var i = 0; i < numAnti; i++) { // fill image array
