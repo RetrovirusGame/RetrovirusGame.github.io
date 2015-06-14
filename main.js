@@ -18,7 +18,8 @@ function init() { // Main function
         gridCount = 20,
         counter = 0,
         yCount = 0,
-        ab = [numAnti]
+        ab = [numAnti],
+        lastKey = []
     
     c.width = width
     c.height = height
@@ -187,14 +188,13 @@ function init() { // Main function
     }
     
     virus.x = gridW * gridCount / 2 - gridW // Set the virus's starting position
-    virus.y = gridH * 4 // To offset image for collision
+    virus.y = gridH * yCount / 2 // To offset image for collision
     
     function getRandomY() {
         return Math.round(Math.random() * (yCount))
     }
 
     function getRandomX() {
-        console.log(Math.round(Math.random() * (gridCount - 1)))
         return Math.round(Math.random() * (gridCount - 1))
     }
 
@@ -207,7 +207,6 @@ function init() { // Main function
         if (antiArray[i].y == virus.y || antiArray[i].y + gridH == virus.y || antiArray[i].y - gridH == virus.y) {
             antiArray[i].y = gridH * getRandomY()
         }
-        console.log(antiArray[i].x + ", " + antiArray[i].y)
     }
     
     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
@@ -237,7 +236,7 @@ function init() { // Main function
                 virus.move(virus.x - gridW, virus.y - gridH)
                 virus.x -= gridW
                 virus.y -= gridH
-                return [37, 38] //Last key
+                lastKey = "leftup" //Last key
             }
         }
         
@@ -247,7 +246,7 @@ function init() { // Main function
                 virus.move(virus.x + gridW, virus.y - gridH)
                 virus.x += gridW
                 virus.y -= gridH
-                return [39, 38] //Last key
+                lastKey = "rightup" //Last key
             }
         }
         
@@ -257,7 +256,7 @@ function init() { // Main function
                 virus.move(virus.x - gridW, virus.y + gridH)
                 virus.x -= gridW
                 virus.y += gridH
-                return [37, 40] //Last key
+                lastKey = "leftdown" //Last key
             }
         }
         
@@ -267,7 +266,7 @@ function init() { // Main function
                 virus.move(virus.x + gridW, virus.y + gridH)
                 virus.x += gridW
                 virus.y += gridH
-                return [39, 40] //Last key
+                lastKey = "rightdown" //Last key
             }
         }
 
@@ -276,7 +275,7 @@ function init() { // Main function
             else { // Print image at new position
                 virus.move(virus.x - gridW, virus.y)
                 virus.x -= gridW
-                return 37 //Last key
+                lastKey = "left" //Last key
             }
         }
         
@@ -285,7 +284,7 @@ function init() { // Main function
             else { // Print image at new position
                 virus.move(virus.x - gridW, virus.y)
                 virus.x -= gridW
-                return 65 //Last key
+                lastKey = "left" //Last key
             }
         }
         
@@ -294,7 +293,7 @@ function init() { // Main function
             else {
                 virus.move(virus.x, virus.y - gridH)
                 virus.y -= gridH
-                return 38
+                lastKey = "up"
             }
         }
                 
@@ -303,7 +302,7 @@ function init() { // Main function
             else {
                 virus.move(virus.x, virus.y - gridH)
                 virus.y -= gridH
-                return 87
+                lastKey = "up"
             }
         }
         
@@ -312,7 +311,7 @@ function init() { // Main function
             else {
                 virus.move(virus.x + gridW, virus.y)
                 virus.x += gridW
-                return 39
+                lastKey = "right"
             }
         }
         
@@ -321,7 +320,7 @@ function init() { // Main function
             else {
                 virus.move(virus.x + gridW, virus.y)
                 virus.x += gridW
-                return 68
+                lastKey = "right"
             }
         }
                 
@@ -330,7 +329,7 @@ function init() { // Main function
             else {
                 virus.move(virus.x, virus.y + gridH)
                 virus.y += gridH
-                return 40
+                lastKey = "down"
             }
         }
         
@@ -339,7 +338,7 @@ function init() { // Main function
             else {
                 virus.move(virus.x, virus.y + gridH)
                 virus.y += gridH
-                return 83
+                lastKey = "down"
             }
         }
     }
