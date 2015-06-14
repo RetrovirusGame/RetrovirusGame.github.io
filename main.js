@@ -16,8 +16,9 @@ function init() { // Main function
         gridH,                                     // For accessing movement distance/grid height
         gridW,                                     // For accessing movement distance/grid width
         gridCount = 20,
-        counter = 0.
-        yCount = 0
+        counter = 0,
+        yCount = 0,
+        ab = [numAnti]
     
     c.width = width
     c.height = height
@@ -25,6 +26,13 @@ function init() { // Main function
     cH = c.height
     centerW = cW / 2
     centerH = cH / 2
+
+    for (var i = 0; i < numAnti; i++) {
+        ab[i] = document.createElement("img")
+        ab[i].id = "abImg" + String(i)
+        ab[i].src = "antibody.png"
+        c.appendChild(ab[i])
+    }
     
     ////////////////////// FUNCTIONS //////////////////////
     
@@ -208,9 +216,9 @@ function init() { // Main function
     
     /////////////////// EVENT LISTENERS ///////////////////
     
-    setInterval(function () { // allow antibody to track the virus every 500 milliseconds
+    setInterval(function () { // allow antibody to track the virus every 300 milliseconds
         for (var i = 0 ; i < numAnti ; i++) {
-            if (antiArray[i].x == virus.x && antiArray[i].y == virus.y) { // Margin of error
+            if (antiArray[i].x == virus.x && antiArray[i].y == virus.y) {
                 virus.health -= 1
                 console.log(virus.health)
             } else {
