@@ -213,7 +213,7 @@ function init() { // Main function
                 antiArray[i].track(virus)
             }
         }
-    }, 500);
+    }, 300);
     
     var map = []
     onkeydown = onkeyup = function(e) {
