@@ -148,13 +148,17 @@ function init() { // Main function
             } else if (this.y - v.y > 0 && this.y - v.y > this.x - v.x) {
                 this.move(this.x, this.y -= gridH)
             } else if (this.x - v.x > 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                this.move(this.x -= gridW, this.y -= gridH)
+                setInterval(function () { this.move(this.x -= gridW, this.y) }, 500)
+                this.move(this.x, this.y -= gridH)
             } else if (this.x - v.x < 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                this.move(this.x += gridW, this.y += gridH)
+                setInterval(function () { this.move(this.x += gridW, this.y) }, 250)
+                this.move(this.x, this.y += gridH)
             } else if (this.x - v.x > 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                this.move(this.x -= gridW, this.y += gridH)
+                setInterval(function () { this.move(this.x -= gridW, this.y) }, 500)
+                this.move(this.x, this.y += gridH)
             } else if (this.x - v.x < 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                this.move(this.x += gridW, this.y -= gridH)
+                setInterval(function () { this.move(this.x += gridW, this.y) }, 500)
+                this.move(this.x, this.y -= gridH)
             }
         }
     }
