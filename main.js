@@ -14,7 +14,8 @@ function init() { // Main function
         cW,                                        // Shortcut to the canvas's width
         cH,                                        // Shortcut to the canvas's height
         gridH,                                     // For accessing movement distance/grid height
-        gridW;                                     // For accessing movement distance/grid width
+        gridW,
+        gridCount = 20;                                     // For accessing movement distance/grid width
     
     c.width = width
     c.height = height
@@ -53,7 +54,7 @@ function init() { // Main function
         }
     }
     
-    grid(20) // 20 squares across
+    grid(gridCount) // 20 squares across
     
     /////////////////////// CLASSES ///////////////////////
     
@@ -116,7 +117,7 @@ function init() { // Main function
                 y = this.y
             }
         
-            ctx.drawImage(this.img, x, y)
+            ctx.drawImage(this.img, x + gridW / 2 - 4, y + gridH / 2 - 4) // The virus is 8x8, and 8 / 2 = 4
         },
         
         move: function (newX, newY) { // same as the other one
@@ -132,7 +133,7 @@ function init() { // Main function
         },
         
         track: function (v) { // antibody AI
-            if (this.x - v.x > 32 && this.x - v.x > this.y - v.y) {
+            if (this.x - v.x > gridW / 2 && this.x - v.x > this.y - v.y) {
                 this.move(this.x -= gridW, this.y)
             } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
                 this.move(this.x, this.y += gridH)
@@ -159,23 +160,23 @@ function init() { // Main function
         antiArray[i].img = abImgArray[i]
     }
     
-    virus.x = centerW // Set the virus's starting position
-    virus.y = Math.round(centerH - gridH / 2) // To offset image for collision
+    virus.x = gridW * gridCount / 2 - gridW // Set the virus's starting position
+    virus.y = gridH * 4 // To offset image for collision
     
-    antiArray[0].x = Math.round(gridW * 3 + gridW / 2) // set the starting positions of antibodies
-    antiArray[0].y = Math.round(gridH * 6 + gridH / 2)
+    antiArray[0].x = Math.round(gridW * 3) // set the starting positions of antibodies
+    antiArray[0].y = Math.round(gridH * 6)
     
-    antiArray[1].x = Math.round(gridW * 15 + gridW / 2)
-    antiArray[1].y = Math.round(gridH * 4 + gridH / 2)
+    antiArray[1].x = Math.round(gridW * 15)
+    antiArray[1].y = Math.round(gridH * 4)
     
-    antiArray[2].x = Math.round(gridW * 7 + gridW / 2)
-    antiArray[2].y = Math.round(gridH * 5 + gridH / 2)
+    antiArray[2].x = Math.round(gridW * 7)
+    antiArray[2].y = Math.round(gridH * 5)
     
-    antiArray[3].x = Math.round(gridW * 9 + gridW / 2)
-    antiArray[3].y = Math.round(gridH * 2 + gridH / 2)
+    antiArray[3].x = Math.round(gridW * 9)
+    antiArray[3].y = Math.round(gridH * 2)
     
-    antiArray[4].x = Math.round(gridW * 8 + gridW / 2)
-    antiArray[4].y = Math.round(gridH * 9 + gridH / 2)
+    antiArray[4].x = Math.round(gridW * 8)
+    antiArray[4].y = Math.round(gridH * 9)
     
     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
     ctx.fillStyle = "black"
@@ -184,30 +185,8 @@ function init() { // Main function
     /////////////////// EVENT LISTENERS ///////////////////
     
     setInterval(function () { // allow antibody to track the virus every 500 milliseconds
-        var computeX = function (abArray) { // Solve for the x value
-            return Math.round((abArray.x - (gridW / 2 - 1)) - 1)
-        }
-                
-        var computeY = function (abArray) { // Solve for the y value
-            return Math.round((abArray.y - (gridH / 2 - 10)) - 1)
-        }
-                
-        var xFormulaArray = [numAnti], // Array for all of the x formulas
-            yFormulaArray = [numAnti]; // Array for all of the y formulas
-                
-        for (var i = 0 ; i < numAnti ; i++) { // Assign the x formulas
-            xFormulaArray[i] = computeX(antiArray[i])
-        }
-                
-        for (var i = 0 ; i < numAnti ; i++) { // Assign the y formulas
-            yFormulaArray[i] = computeY(antiArray[i])
-        }
-                
-        var xForumla = Math.round((antiArray[0].x - (gridW / 2 - 1)) - 1) // IMPORTANT FORMULA
-        var yFormula = Math.round((antiArray[0].y - (gridH / 2 - 10)) - 1) // IMPORTANT FORMULA
-                
         for (var i = 0 ; i < numAnti ; i++) {
-            if (Math.abs(xFormulaArray[i] - virus.x) <= (gridW / 2 - 2) && Math.abs(yFormulaArray[i] - virus.y) <= (gridH / 2 - 2)) { // Margin of error
+            if (antiArray[i].x == virus.x && antiArray[i].y == virus.y) { // Margin of error
                 virus.health -= 1
                 console.log(virus.health)
             } else {
