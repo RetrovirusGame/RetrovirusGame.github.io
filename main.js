@@ -192,11 +192,11 @@ function init() { // Main function
 
     for (var i = 0; i < numAnti; i++) {
         antiArray[i].x = gridW * getRandomX()
-        if (antiArray[i].x == virus.x) {
+        if (antiArray[i].x == virus.x || antiArray[i].x + gridW == virus.x || antiArray[i].x - gridW == virus.x) {
             antiArray[i].x = gridW * getRandomX()
         }
         antiArray[i].y = gridH * getRandomY()
-        if (antiArray[i].y == virus.y) {
+        if (antiArray[i].y == virus.y || antiArray[i].y + gridH == virus.y || antiArray[i].y - gridH == virus.y) {
             antiArray[i].y = gridH * getRandomY()
         }
         console.log(antiArray[i].x + ", " + antiArray[i].y)
