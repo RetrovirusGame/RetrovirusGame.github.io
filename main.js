@@ -14,8 +14,10 @@ function init() { // Main function
         cW,                                        // Shortcut to the canvas's width
         cH,                                        // Shortcut to the canvas's height
         gridH,                                     // For accessing movement distance/grid height
-        gridW,
-        gridCount = 20;                                     // For accessing movement distance/grid width
+        gridW,                                     // For accessing movement distance/grid width
+        gridCount = 20,
+        counter = 0.
+        yCount = 0
     
     c.width = width
     c.height = height
@@ -43,7 +45,7 @@ function init() { // Main function
             // ctx.strokeStyle = "white"
             ctx.stroke()
         }
-        
+        counter = 0
         for (var i = countX - 1 ; i > 0 ; i--) {
             gridH = gridW // Ensure a square
             pos = gridH * i
@@ -51,9 +53,13 @@ function init() { // Main function
             ctx.lineTo(cW, pos)
             // ctx.strokeStyle = "white"
             ctx.stroke()
+            counter += 1
+            if (counter * gridH < c.height) { // So we can find the number of grid lengths up/down
+                yCount += 1
+            }
         }
     }
-    
+    yCount = yCount - 1
     grid(gridCount) // 20 squares across
     
     /////////////////////// CLASSES ///////////////////////
@@ -133,7 +139,7 @@ function init() { // Main function
         },
         
         track: function (v) { // antibody AI
-            if (this.x - v.x > gridW / 2 && this.x - v.x > this.y - v.y) {
+            if (this.x - v.x > 0 && this.x - v.x > this.y - v.y) {
                 this.move(this.x -= gridW, this.y)
             } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
                 this.move(this.x, this.y += gridH)
@@ -141,6 +147,14 @@ function init() { // Main function
                 this.move(this.x += gridW, this.y)
             } else if (this.y - v.y > 0 && this.y - v.y > this.x - v.x) {
                 this.move(this.x, this.y -= gridH)
+            } else if (this.x - v.x > 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
+                this.move(this.x -= gridW, this.y -= gridH)
+            } else if (this.x - v.x < 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
+                this.move(this.x += gridW, this.y += gridH)
+            } else if (this.x - v.x > 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
+                this.move(this.x -= gridW, this.y += gridH)
+            } else if (this.x - v.x < 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
+                this.move(this.x += gridW, this.y -= gridH)
             }
         }
     }
@@ -163,20 +177,26 @@ function init() { // Main function
     virus.x = gridW * gridCount / 2 - gridW // Set the virus's starting position
     virus.y = gridH * 4 // To offset image for collision
     
-    antiArray[0].x = Math.round(gridW * 3) // set the starting positions of antibodies
-    antiArray[0].y = Math.round(gridH * 6)
-    
-    antiArray[1].x = Math.round(gridW * 15)
-    antiArray[1].y = Math.round(gridH * 4)
-    
-    antiArray[2].x = Math.round(gridW * 7)
-    antiArray[2].y = Math.round(gridH * 5)
-    
-    antiArray[3].x = Math.round(gridW * 9)
-    antiArray[3].y = Math.round(gridH * 2)
-    
-    antiArray[4].x = Math.round(gridW * 8)
-    antiArray[4].y = Math.round(gridH * 9)
+    function getRandomY() {
+        return Math.round(Math.random() * (yCount))
+    }
+
+    function getRandomX() {
+        console.log(Math.round(Math.random() * (gridCount - 1)))
+        return Math.round(Math.random() * (gridCount - 1))
+    }
+
+    for (var i = 0; i < numAnti; i++) {
+        antiArray[i].x = gridW * getRandomX()
+        if (antiArray[i].x == virus.x) {
+            antiArray[i].x = gridW * getRandomX()
+        }
+        antiArray[i].y = gridH * getRandomY()
+        if (antiArray[i].y == virus.y) {
+            antiArray[i].y = gridH * getRandomY()
+        }
+        console.log(antiArray[i].x + ", " + antiArray[i].y)
+    }
     
     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
     ctx.fillStyle = "black"
