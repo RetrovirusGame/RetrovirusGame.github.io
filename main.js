@@ -19,7 +19,8 @@ function init() { // Main function
         counter = 0,
         yCount = 0,
         ab = [numAnti],
-        lastKey = []
+        lastKey,
+        lastDir
     
     c.width = width
     c.height = height
@@ -150,24 +151,32 @@ function init() { // Main function
         track: function (v) { // antibody AI
             if (this.x - v.x > 0 && this.x - v.x > this.y - v.y) {
                 this.move(this.x -= gridW, this.y)
+                lastDir = "right"
             } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
                 this.move(this.x, this.y += gridH)
+                lastDir = "down"
             } else if (this.x - v.x < 0 && this.x - v.x < this.y - v.y) {
                 this.move(this.x += gridW, this.y)
+                lastDir = "left"
             } else if (this.y - v.y > 0 && this.y - v.y > this.x - v.x) {
                 this.move(this.x, this.y -= gridH)
+                lastDir = "up"
             } else if (this.x - v.x > 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setInterval(function () { this.move(this.x -= gridW, this.y) }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, 300)
                 this.move(this.x, this.y -= gridH)
+                lastDir = "up"
             } else if (this.x - v.x < 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setInterval(function () { this.move(this.x += gridW, this.y) }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, 300)
                 this.move(this.x, this.y += gridH)
+                lastDir = "down"
             } else if (this.x - v.x > 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setInterval(function () { this.move(this.x -= gridW, this.y) }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, 300)
                 this.move(this.x, this.y += gridH)
+                lastDir = "down"
             } else if (this.x - v.x < 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setInterval(function () { this.move(this.x += gridW, this.y) }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, 300)
                 this.move(this.x, this.y -= gridH)
+                lastDir = "up"
             }
         }
     }
@@ -221,6 +230,20 @@ function init() { // Main function
                 virus.health -= 1
                 console.log(virus.health)
             } else {
+                for (var j = 0; j < numAnti; j++) {
+                    if (i != j) {
+                        if (antiArray[i].x == antiArray[j].x) {
+                            if (antiArray[i].y == antiArray[j].y) {
+                                switch (lastDir) {
+                                    case "up": antiArray[i].move(antiArray[i].x, antiArray[i].y += gridH); break
+                                    case "down": antiArray[i].move(antiArray[i].x, antiArray[i].y -= gridH); break
+                                    case "left": antiArray[i].move(antiArray[i].x += gridW, antiArray[i].y); break
+                                    case "right": antiArray[i].move(antiArray[i].x -= gridW, antiArray[i].y); break
+                                }
+                            }
+                        }
+                    }
+                }
                 antiArray[i].track(virus)
             }
         }
