@@ -20,7 +20,10 @@ function init() { // Main function
         yCount = 0,
         ab = [numAnti],
         lastKey,
-        lastDir
+        lastDir,
+        end = false,
+        lostText = "You Lose!",
+        speed = 150
     
     c.width = width
     c.height = height
@@ -162,19 +165,19 @@ function init() { // Main function
                 this.move(this.x, this.y -= gridH)
                 lastDir = "up"
             } else if (this.x - v.x > 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, speed)
                 this.move(this.x, this.y -= gridH)
                 lastDir = "up"
             } else if (this.x - v.x < 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, speed)
                 this.move(this.x, this.y += gridH)
                 lastDir = "down"
             } else if (this.x - v.x > 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, speed)
                 this.move(this.x, this.y += gridH)
                 lastDir = "down"
             } else if (this.x - v.x < 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, 300)
+                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, speed)
                 this.move(this.x, this.y -= gridH)
                 lastDir = "up"
             }
@@ -228,17 +231,19 @@ function init() { // Main function
         for (var i = 0 ; i < numAnti ; i++) {
             if (antiArray[i].x == virus.x && antiArray[i].y == virus.y) {
                 virus.health -= 1
-                console.log(virus.health)
+                if (virus.health <= 0) {
+                    virus.health = ""
+                }
             } else {
                 for (var j = 0; j < numAnti; j++) {
                     if (i != j) {
                         if (antiArray[i].x == antiArray[j].x) {
                             if (antiArray[i].y == antiArray[j].y) {
                                 switch (lastDir) {
-                                    case "up": antiArray[i].move(antiArray[i].x, antiArray[i].y += gridH); break
-                                    case "down": antiArray[i].move(antiArray[i].x, antiArray[i].y -= gridH); break
-                                    case "left": antiArray[i].move(antiArray[i].x += gridW, antiArray[i].y); break
-                                    case "right": antiArray[i].move(antiArray[i].x -= gridW, antiArray[i].y); break
+                                    case "up": antiArray[i].move(antiArray[i].x, antiArray[i].y += gridH); antiArray[j].move(antiArray[j].x, antiArray[j].y -= gridH); break
+                                    case "down": antiArray[i].move(antiArray[i].x, antiArray[i].y -= gridH); antiArray[j].move(antiArray[j].x, antiArray[j].y += gridH); break
+                                    case "left": antiArray[i].move(antiArray[i].x += gridW, antiArray[i].y); antiArray[j].move(antiArray[j].x -= gridW, antiArray[j].y); break
+                                    case "right": antiArray[i].move(antiArray[i].x -= gridW, antiArray[i].y); antiArray[j].move(antiArray[j].x += gridW, antiArray[j].y); break
                                 }
                             }
                         }
@@ -247,13 +252,52 @@ function init() { // Main function
                 antiArray[i].track(virus)
             }
         }
-    }, 300);
+    }, speed);
+
+    setInterval(function () {
+        ctx.textAlign = "center"
+        ctx.font = "12pt ABeeZee"
+        ctx.fillStyle = "white"
+        ctx.fillText(virus.health, 20, 20)
+        if (virus.health <= 0) {
+            virus.health = ""
+            ctx.textAlign = "center"
+            ctx.font = "36pt ABeeZee"
+            ctx.fillStyle = "white"
+            ctx.fillText(lostText, centerW, centerH)
+            end = true
+            for (var i in antiArray) antiArray[i].x = 10000; antiArray[i].y = 10000
+            virus.x = 10000
+            virus.y = 10000
+        }
+    }, 1)
     
     var map = []
     onkeydown = onkeyup = function(e) {
         e = e || event
         map[e.keyCode] = e.type == 'keydown'
-        if (map[37] && map[38]) { // Left and Up
+        var up, down, left, right
+        if (map[38] || map[87]) {
+            if (map[38] != map[87]) {
+                up = true
+            }
+        }
+        if (map[37] || map[65]) {
+            if (map[37] != map[65]) {
+                left = true
+            }
+        }
+        if (map[40] || map[83]) {
+            if (map[40] != map[83]) {
+                down = true
+            }
+        }
+        if (map[39] || map[68]) {
+            if (map[39] != map[68]) {
+                right = true
+            }
+        }
+        if (left && up && !end) { // Left and Up
             if (virus.x - gridW < 0 || virus.y - gridH < 0) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x - gridW, virus.y - gridH)
@@ -263,7 +307,7 @@ function init() { // Main function
             }
         }
         
-        else if (map[39] && map[38]) { // Right and Up
+        else if (right && up && !end) { // Right and Up
             if (virus.x + gridW * 2 > cW || virus.y - gridH < 0) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x + gridW, virus.y - gridH)
@@ -273,7 +317,7 @@ function init() { // Main function
             }
         }
         
-        else if (map[37] && map[40]) { // Left and Down
+        else if (left && down && !end) { // Left and Down
             if (virus.x - gridW < 0 || virus.y + gridH * 2 > cH) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x - gridW, virus.y + gridH)
@@ -283,7 +327,7 @@ function init() { // Main function
             }
         }
         
-        else if (map[39] && map[40]) { // Right and Down
+        else if (right && down && !end) { // Right and Down
             if (virus.x + gridW * 2 > cW || virus.y + gridH * 2 > cH) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x + gridW, virus.y + gridH)
@@ -293,7 +337,7 @@ function init() { // Main function
             }
         }
 
-        else if (map[37]) { // Left
+        else if (left && !end) { // Left
             if (virus.x - gridW < 0) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x - gridW, virus.y)
@@ -302,25 +346,7 @@ function init() { // Main function
             }
         }
         
-        else if (map[65]) { // 'a'
-            if (virus.x - gridW < 0) { return false } // For edge collision
-            else { // Print image at new position
-                virus.move(virus.x - gridW, virus.y)
-                virus.x -= gridW
-                lastKey = "left" //Last key
-            }
-        }
-        
-        else if (map[38]) { // Up
-            if (virus.y - gridH < 0) { return false }
-            else {
-                virus.move(virus.x, virus.y - gridH)
-                virus.y -= gridH
-                lastKey = "up"
-            }
-        }
-                
-        else if (map[87]) { // 'w'
+        else if (up && !end) { // Up
             if (virus.y - gridH < 0) { return false }
             else {
                 virus.move(virus.x, virus.y - gridH)
@@ -329,16 +355,7 @@ function init() { // Main function
             }
         }
         
-        else if (map[39]) { // Right
-            if (virus.x + gridW * 2 > cW) { return false }
-            else {
-                virus.move(virus.x + gridW, virus.y)
-                virus.x += gridW
-                lastKey = "right"
-            }
-        }
-        
-        else if (map[68]) { // 'd'
+        else if (right && !end) { // Right
             if (virus.x + gridW * 2 > cW) { return false }
             else {
                 virus.move(virus.x + gridW, virus.y)
@@ -347,16 +364,7 @@ function init() { // Main function
             }
         }
                 
-        else if (map[40]) { // Down
-            if (virus.y + gridH * 2 > cH) { return false }
-            else {
-                virus.move(virus.x, virus.y + gridH)
-                virus.y += gridH
-                lastKey = "down"
-            }
-        }
-        
-        else if (map[83]) { // 's'
+        else if (down && !end) { // Down
             if (virus.y + gridH * 2 > cH) { return false }
             else {
                 virus.move(virus.x, virus.y + gridH)
@@ -366,91 +374,15 @@ function init() { // Main function
         }
     }
     
-    /*window.addEventListener("keydown", function (e) { // Key listener | Moves virus in specified direction
-        switch (e.keyCode) {
-            case 37: // Left
-                if (virus.x - gridW < 0) { return false } // For edge collision
-                else { // Print image at new position
-                    virus.move(virus.x - gridW, virus.y)
-                    virus.x -= gridW
-                    return 37 //Last key
-                }
-                break
-                            
-            case 65: // 'a'
-                if (virus.x - gridW < 0) { return false } // For edge collision
-                else { // Print image at new position
-                    virus.move(virus.x - gridW, virus.y)
-                    virus.x -= gridW
-                    return 65 //Last key
-                }
-                break
-                            
-            case 38: // Up
-                if (virus.y - gridH < 0) { return false }
-                else {
-                    virus.move(virus.x, virus.y - gridH)
-                    virus.y -= gridH
-                    return 38
-                }
-                break
-            
-            case 87: // 'w'
-                if (virus.y - gridH < 0) { return false }
-                else {
-                    virus.move(virus.x, virus.y - gridH)
-                    virus.y -= gridH
-                    return 87
-                }
-                break
-                            
-            case 39: // Right
-                if (virus.x + gridW * 2 > cW) { return false }
-                else {
-                    virus.move(virus.x + gridW, virus.y)
-                    virus.x += gridW
-                    return 39
-                }
-                break
-            
-            case 68: // 'd'
-                if (virus.x + gridW * 2 > cW) { return false }
-                else {
-                    virus.move(virus.x + gridW, virus.y)
-                    virus.x += gridW
-                    return 68
-                }
-                break
-                            
-            case 40: // Down
-                if (virus.y + gridH * 2 > cH) { return false }
-                else {
-                    virus.move(virus.x, virus.y + gridH)
-                    virus.y += gridH
-                    return 40
-                }
-                break
-            
-            case 83: // 's'
-                if (virus.y + gridH * 2 > cH) { return false }
-                else {
-                    virus.move(virus.x, virus.y + gridH)
-                    virus.y += gridH
-                    return 83
-                }
-                break
-        }
-    }, false);*/
-    
     window.addEventListener("load", function () { // runs when page loads, sets scene
         virus.render()
         for (var i in antiArray) antiArray[i].render()
-    }, false);
+    }, false)
     
     window.addEventListener('resize', function() {
         c.width = window.innerWidth
         c.height = window.innerHeight
-    });
+    })
 }
 
 document.addEventListener("DOMContentLoaded", init, false) // Run when the DOM has loaded
