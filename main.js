@@ -1,4 +1,6 @@
-function init() { // Main function
+var trackCount = 0
+
+function update() {
     
     ///////////////// VARIABLE INITIATION /////////////////
     
@@ -23,7 +25,7 @@ function init() { // Main function
         lastDir,
         end = false,
         lostText = "You Lose!",
-        speed = 150
+        speed = 300
     
     c.width = width
     c.height = height
@@ -55,8 +57,8 @@ function init() { // Main function
             pos = gridW * i
             ctx.moveTo(pos, 0)
             ctx.lineTo(pos, cH)
-            // ctx.strokeStyle = "white"
-            ctx.stroke()
+            ctx.strokeStyle = "white"
+            //ctx.stroke()
         }
         counter = 0
         for (var i = countX - 1 ; i > 0 ; i--) {
@@ -64,8 +66,8 @@ function init() { // Main function
             pos = gridH * i
             ctx.moveTo(0, pos)
             ctx.lineTo(cW, pos)
-            // ctx.strokeStyle = "white"
-            ctx.stroke()
+            ctx.strokeStyle = "white"
+            //ctx.stroke()
             counter += 1
             if (counter * gridH < c.height) { // So we can find the number of grid lengths up/down
                 yCount += 1
@@ -98,24 +100,32 @@ function init() { // Main function
         },
         
         move: function (newX, newY) { // move virus to new location
-            ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
+            //ctx.clearRect(0, 0, cW, cH)
+            //ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+            //ctx.fillStyle = "black"
+            //ctx.fill()
             if (newX >= 1 && newY >= 1) {
-                ctx.drawImage(this.img, newX, newY)
+                this.x = newX
+                this.y = newY
+                //ctx.drawImage(this.img, newX, newY)
             } else if (newX < 1 && newY < 1) {
                 newX = 1
                 newY = 1
-                ctx.drawImage(this.img, newX, newY)
+                this.x = newX
+                this.y = newY
+                //ctx.drawImage(this.img, newX, newY)
             } else if (newX < 1) {
                 newX = 1
-                ctx.drawImage(this.img, newX, newY)
+                this.x = newX
+                this.y = newY
+                //ctx.drawImage(this.img, newX, newY)
             } else if (newY < 1) {
                 newY = 1
-                ctx.drawImage(this.img, newX, newY)
+                this.x = newX
+                this.y = newY
+                //ctx.drawImage(this.img, newX, newY)
             }
-            for (var i in antiArray) antiArray[i].render()
+            //for (var i in antiArray) antiArray[i].render()
             return this.x + ", " + this.y
         }
     }
@@ -140,14 +150,14 @@ function init() { // Main function
         },
         
         move: function (newX, newY) { // same as the other one
-            ctx.clearRect(0, 0, cW, cH)
-            ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-            ctx.fillStyle = "black"
-            ctx.fill()
+            //ctx.clearRect(0, 0, cW, cH)
+            //ctx.rect(0, 0, cW, cH) // Set the canvas background to black
+            //ctx.fillStyle = "black"
+            //ctx.fill()
             this.x = newX
             this.y = newY
-            virus.render()
-            for (var i in antiArray) antiArray[i].render()
+            //virus.render()
+            //for (var i in antiArray) antiArray[i].render()
             return this.x * this.y
         },
         
@@ -186,6 +196,9 @@ function init() { // Main function
     
     var virus = new RetroVirus() // Create new virus with constructor
     virus.img = document.getElementById("vImg")
+    virus.x = gridW * gridCount / 2 - gridW // Set the virus's starting position
+    virus.y = gridH * yCount / 2 // To offset image for collision
+
     
     for (var i = 0 ; i < numAnti ; i++) { // fill antibody array
         antiArray[i] = new Antibody()
@@ -198,9 +211,6 @@ function init() { // Main function
     for (var i = 0 ; i < numAnti ; i++) { // set image elements in antibody array
         antiArray[i].img = abImgArray[i]
     }
-    
-    virus.x = gridW * gridCount / 2 - gridW // Set the virus's starting position
-    virus.y = gridH * yCount / 2 // To offset image for collision
     
     function getRandomY() {
         return Math.round(Math.random() * (yCount))
@@ -223,13 +233,15 @@ function init() { // Main function
     
     ctx.rect(0, 0, cW, cH) // Set the canvas background to black
     ctx.fillStyle = "black"
-    ctx.fill()
+    //ctx.fill()
     
     /////////////////// EVENT LISTENERS ///////////////////
     
-    setInterval(function () { // allow antibody to track the virus every 300 milliseconds
+    if (trackCount == 20) {
+    //setInterval(function () { // allow antibody to track the virus every 300 milliseconds
+        trackCount -= 20
         for (var i = 0 ; i < numAnti ; i++) {
-            if (antiArray[i].x == virus.x && antiArray[i].y == virus.y) {
+            if ((antiArray[i].x <= virus.x + 5 && antiArray[i].x >= virus.x - 5) || (antiArray[i].y <= virus.y + 5 && antiArray[i].y >= virus.y - 5)) {
                 virus.health -= 1
                 if (virus.health <= 0) {
                     virus.health = ""
@@ -252,25 +264,27 @@ function init() { // Main function
                 antiArray[i].track(virus)
             }
         }
-    }, speed);
+    }
+    trackCount++
+    //}, speed)
 
-    setInterval(function () {
+    /*setInterval(function () {
         ctx.textAlign = "center"
         ctx.font = "12pt ABeeZee"
         ctx.fillStyle = "white"
-        ctx.fillText(virus.health, 20, 20)
+        //ctx.fillText(virus.health, 20, 20)
         if (virus.health <= 0) {
             virus.health = ""
             ctx.textAlign = "center"
             ctx.font = "36pt ABeeZee"
             ctx.fillStyle = "white"
-            ctx.fillText(lostText, centerW, centerH)
+            //ctx.fillText(lostText, centerW, centerH)
             end = true
             for (var i in antiArray) antiArray[i].x = 10000; antiArray[i].y = 10000
             virus.x = 10000
             virus.y = 10000
         }
-    }, 1)
+    }, 1)*/
     
     var map = []
     onkeydown = onkeyup = function(e) {
@@ -359,7 +373,7 @@ function init() { // Main function
             if (virus.x + gridW * 2 > cW) { return false }
             else {
                 virus.move(virus.x + gridW, virus.y)
-                virus.x += gridW
+                //virus.x += gridW
                 lastKey = "right"
             }
         }
@@ -383,6 +397,34 @@ function init() { // Main function
         c.width = window.innerWidth
         c.height = window.innerHeight
     })
+    
+    var draw = function() {
+        ctx.clearRect(0, 0, cW, cH)
+        ctx.rect(0, 0, cH, cW) // Set the canvas background to black
+        ctx.fillStyle = "black"
+        ctx.fill()
+        virus.render()
+        //for (var i in antiArray) antiArray[i].render()
+        ctx.fillText(virus.health, 20, 20)
+        if (virus.health <= 0) {
+            virus.health = ""
+            ctx.textAlign = "center"
+            ctx.font = "36pt ABeeZee"
+            ctx.fillStyle = "white"
+            ctx.fillText(lostText, centerW, centerH)
+            end = true
+            for (var i in antiArray) antiArray[i].x = 10000; antiArray[i].y = 10000
+            virus.x = 10000
+            virus.y = 10000
+        }
+    }
+    draw()
+}
+
+function init() { // Main function
+    var fps = 60
+    var loop = setInterval(update, 1000 / fps)
+    // clearInterval(loop)
 }
 
 document.addEventListener("DOMContentLoaded", init, false) // Run when the DOM has loaded
