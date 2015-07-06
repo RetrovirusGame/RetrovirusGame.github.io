@@ -22,7 +22,7 @@ function init() { // Main function
         lastKey,
         lastDir,
         end = false,
-        lostText = "You Lose!",
+        lostText = "",
         speed = 150
     
     c.width = width
@@ -221,10 +221,6 @@ function init() { // Main function
         }
     }
     
-    ctx.rect(0, 0, cW, cH) // Set the canvas background to black
-    ctx.fillStyle = "black"
-    ctx.fill()
-    
     /////////////////// EVENT LISTENERS ///////////////////
     
     setInterval(function () { // allow antibody to track the virus every 300 milliseconds
@@ -233,6 +229,11 @@ function init() { // Main function
                 virus.health -= 1
                 if (virus.health <= 0) {
                     virus.health = ""
+                    end = true
+                    ctx.textAlign = "center"
+    				ctx.font = "12pt ABeeZee"
+    				ctx.fillStyle = "white"
+    				ctx.fillText(lostText, centerW, centerH)
                 }
             } else {
                 for (var j = 0; j < numAnti; j++) {
@@ -261,17 +262,13 @@ function init() { // Main function
         ctx.fillText(virus.health, 20, 20)
         if (virus.health <= 0) {
             virus.health = ""
-            ctx.textAlign = "center"
-            ctx.font = "36pt ABeeZee"
-            ctx.fillStyle = "white"
-            ctx.fillText(lostText, centerW, centerH)
             end = true
             for (var i in antiArray) antiArray[i].x = 10000; antiArray[i].y = 10000
             virus.x = 10000
             virus.y = 10000
         }
     }, 1)
-    
+
     var map = []
     onkeydown = onkeyup = function(e) {
         e = e || event
