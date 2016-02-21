@@ -3,7 +3,7 @@ function init() { // Main function
     ///////////////// VARIABLE INITIATION /////////////////
     
     var c = document.getElementById("retrovirus"), // Access the canvas
-        numAnti = 1,                               // Number of Antibodies
+        numAnti = 5,                               // Number of Antibodies
         abImgArray = [numAnti],                    // Array of antibody images
         antiArray = [numAnti],                     // Array of antibodies
         ctx = c.getContext("2d"),                  // 2D Canvas context
