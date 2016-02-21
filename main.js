@@ -103,17 +103,17 @@ function init() { // Main function
             ctx.fillStyle = "black"
             ctx.fill()
             if (newX >= 1 && newY >= 1) {
-                ctx.drawImage(this.img, newX * gridW, newY * gridH)
+                this.render(newX, newY)
             } else if (newX < 1 && newY < 1) {
                 newX = 1
                 newY = 1
-                ctx.drawImage(this.img, newX, newY)
+                this.render(newX, newY)
             } else if (newX < 1) {
                 newX = 1
-                ctx.drawImage(this.img, newX, newY)
+                this.render(newX, newY)
             } else if (newY < 1) {
                 newY = 1
-                ctx.drawImage(this.img, newX, newY)
+                this.render(newX, newY)
             }
             for (var i in antiArray) antiArray[i].render()
             return this.x + ", " + this.y
