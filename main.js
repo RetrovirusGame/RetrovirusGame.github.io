@@ -94,7 +94,7 @@ function init() { // Main function
                 y = this.y
             }
         
-            ctx.drawImage(this.img, x, y)
+            ctx.drawImage(this.img, x * gridW, y * gridH)
         },
         
         move: function (newX, newY) { // move virus to new location
@@ -136,7 +136,7 @@ function init() { // Main function
                 y = this.y
             }
         
-            ctx.drawImage(this.img, x + gridW / 2 - 4, y + gridH / 2 - 4) // The virus is 8x8, and 8 / 2 = 4
+            ctx.drawImage(this.img, x * gridW, y * gridH) // The virus is 8x8, and 8 / 2 = 4
         },
         
         move: function (newX, newY) { // same as the other one
@@ -153,32 +153,32 @@ function init() { // Main function
         
         track: function (v) { // antibody AI
             if (this.x - v.x > 0 && this.x - v.x > this.y - v.y) {
-                this.move(this.x -= gridW, this.y)
+                this.move(this.x -= 1, this.y)
                 lastDir = "right"
             } else if (this.y - v.y < 0 && this.y - v.y < this.x - v.x) {
-                this.move(this.x, this.y += gridH)
+                this.move(this.x, this.y += 1)
                 lastDir = "down"
             } else if (this.x - v.x < 0 && this.x - v.x < this.y - v.y) {
-                this.move(this.x += gridW, this.y)
+                this.move(this.x += 1, this.y)
                 lastDir = "left"
             } else if (this.y - v.y > 0 && this.y - v.y > this.x - v.x) {
-                this.move(this.x, this.y -= gridH)
+                this.move(this.x, this.y -= 1)
                 lastDir = "up"
             } else if (this.x - v.x > 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, speed)
-                this.move(this.x, this.y -= gridH)
+                setTimeout(function () { Antibody.move(Antibody.x -= 1, Antibody.y); lastDir = "left" }, speed)
+                this.move(this.x, this.y -= 1)
                 lastDir = "up"
             } else if (this.x - v.x < 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, speed)
-                this.move(this.x, this.y += gridH)
+                setTimeout(function () { Antibody.move(Antibody.x += 1, Antibody.y); lastDir = "right" }, speed)
+                this.move(this.x, this.y += 1)
                 lastDir = "down"
             } else if (this.x - v.x > 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x -= gridW, Antibody.y); lastDir = "left" }, speed)
-                this.move(this.x, this.y += gridH)
+                setTimeout(function () { Antibody.move(Antibody.x -= 1, Antibody.y); lastDir = "left" }, speed)
+                this.move(this.x, this.y += 1)
                 lastDir = "down"
             } else if (this.x - v.x < 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x += gridW, Antibody.y); lastDir = "right" }, speed)
-                this.move(this.x, this.y -= gridH)
+                setTimeout(function () { Antibody.move(Antibody.x += 1, Antibody.y); lastDir = "right" }, speed)
+                this.move(this.x, this.y -= 1)
                 lastDir = "up"
             }
         }
@@ -199,8 +199,8 @@ function init() { // Main function
         antiArray[i].img = abImgArray[i]
     }
     
-    virus.x = gridW * gridCount / 2 - gridW // Set the virus's starting position
-    virus.y = gridH * yCount / 2 // To offset image for collision
+    virus.x = gridCount / 2 // Set the virus's starting position
+    virus.y = yCount / 2 // To offset image for collision
     
     function getRandomY() {
         return Math.round(Math.random() * (yCount))
@@ -211,13 +211,13 @@ function init() { // Main function
     }
 
     for (var i = 0; i < numAnti; i++) {
-        antiArray[i].x = gridW * getRandomX()
-        if (antiArray[i].x == virus.x || antiArray[i].x + gridW == virus.x || antiArray[i].x - gridW == virus.x) {
-            antiArray[i].x = gridW * getRandomX()
+        antiArray[i].x = getRandomX()
+        if (antiArray[i].x == virus.x || antiArray[i].x + 1 == virus.x || antiArray[i].x - 1 == virus.x) {
+            antiArray[i].x = getRandomX()
         }
-        antiArray[i].y = gridH * getRandomY()
-        if (antiArray[i].y == virus.y || antiArray[i].y + gridH == virus.y || antiArray[i].y - gridH == virus.y) {
-            antiArray[i].y = gridH * getRandomY()
+        antiArray[i].y = getRandomY()
+        if (antiArray[i].y == virus.y || antiArray[i].y + 1 == virus.y || antiArray[i].y - 1 == virus.y) {
+            antiArray[i].y = getRandomY()
         }
     }
     
@@ -295,77 +295,77 @@ function init() { // Main function
             }
         }
         if (left && up && !end) { // Left and Up
-            if (virus.x - gridW < 0 || virus.y - gridH < 0) { return false } // For edge collision
+            if (virus.x - 1 < 0 || virus.y - 1 < 0) { return false } // For edge collision
             else { // Print image at new position
-                virus.move(virus.x - gridW, virus.y - gridH)
-                virus.x -= gridW
-                virus.y -= gridH
+                virus.move(virus.x - 1, virus.y - 1)
+                virus.x -= 1
+                virus.y -= 1
                 lastKey = "leftup" //Last key
             }
         }
         
         else if (right && up && !end) { // Right and Up
-            if (virus.x + gridW * 2 > cW || virus.y - gridH < 0) { return false } // For edge collision
+            if (virus.x +  2 > cW || virus.y - 1 < 0) { return false } // For edge collision
             else { // Print image at new position
-                virus.move(virus.x + gridW, virus.y - gridH)
-                virus.x += gridW
-                virus.y -= gridH
+                virus.move(virus.x + 1, virus.y - 1)
+                virus.x += 1
+                virus.y -= 1
                 lastKey = "rightup" //Last key
             }
         }
         
         else if (left && down && !end) { // Left and Down
-            if (virus.x - gridW < 0 || virus.y + gridH * 2 > cH) { return false } // For edge collision
+            if (virus.x - 1 < 0 || virus.y + 2 > cH) { return false } // For edge collision
             else { // Print image at new position
-                virus.move(virus.x - gridW, virus.y + gridH)
-                virus.x -= gridW
-                virus.y += gridH
+                virus.move(virus.x - 1, virus.y + 1)
+                virus.x -= 1
+                virus.y += 1
                 lastKey = "leftdown" //Last key
             }
         }
         
         else if (right && down && !end) { // Right and Down
-            if (virus.x + gridW * 2 > cW || virus.y + gridH * 2 > cH) { return false } // For edge collision
+            if (virus.x + 2 > cW || virus.y + 2 > cH) { return false } // For edge collision
             else { // Print image at new position
-                virus.move(virus.x + gridW, virus.y + gridH)
-                virus.x += gridW
-                virus.y += gridH
+                virus.move(virus.x + 1, virus.y + 1)
+                virus.x += 1
+                virus.y += 1
                 lastKey = "rightdown" //Last key
             }
         }
 
         else if (left && !end) { // Left
-            if (virus.x - gridW < 0) { return false } // For edge collision
+            if (virus.x - 1 < 0) { return false } // For edge collision
             else { // Print image at new position
-                virus.move(virus.x - gridW, virus.y)
-                virus.x -= gridW
+                virus.move(virus.x - 1, virus.y)
+                virus.x -= 1
                 lastKey = "left" //Last key
             }
         }
         
         else if (up && !end) { // Up
-            if (virus.y - gridH < 0) { return false }
+            if (virus.y - 1 < 0) { return false }
             else {
-                virus.move(virus.x, virus.y - gridH)
-                virus.y -= gridH
+                virus.move(virus.x, virus.y - 1)
+                virus.y -= 1
                 lastKey = "up"
             }
         }
         
         else if (right && !end) { // Right
-            if (virus.x + gridW * 2 > cW) { return false }
+            if (virus.x + 2 > cW) { return false }
             else {
-                virus.move(virus.x + gridW, virus.y)
-                virus.x += gridW
+                virus.move(virus.x + 1, virus.y)
+                virus.x += 1
                 lastKey = "right"
             }
         }
                 
         else if (down && !end) { // Down
-            if (virus.y + gridH * 2 > cH) { return false }
+            if (virus.y + 2 > cH) { return false }
             else {
-                virus.move(virus.x, virus.y + gridH)
-                virus.y += gridH
+                virus.move(virus.x, virus.y + 1)
+                virus.y += 1
                 lastKey = "down"
             }
         }
