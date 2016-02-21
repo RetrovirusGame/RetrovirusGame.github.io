@@ -199,8 +199,8 @@ function init() { // Main function
         antiArray[i].img = abImgArray[i]
     }
     
-    virus.x = gridCount / 2 // Set the virus's starting position
-    virus.y = yCount / 2 // To offset image for collision
+    virus.x = round(gridCount / 2) // Set the virus's starting position
+    virus.y = round(yCount / 2) // To offset image for collision
     
     function getRandomY() {
         return Math.round(Math.random() * (yCount))
