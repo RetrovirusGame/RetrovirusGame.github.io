@@ -3,7 +3,7 @@ function init() { // Main function
     ///////////////// VARIABLE INITIATION /////////////////
     
     var c = document.getElementById("retrovirus"), // Access the canvas
-        numAnti = 5,                               // Number of Antibodies
+        numAnti = 1,                               // Number of Antibodies
         abImgArray = [numAnti],                    // Array of antibody images
         antiArray = [numAnti],                     // Array of antibodies
         ctx = c.getContext("2d"),                  // 2D Canvas context
@@ -72,7 +72,7 @@ function init() { // Main function
             }
         }
     }
-    yCount = yCount - 1
+    yCount -= 1
     grid(gridCount) // 20 squares across
     
     /////////////////////// CLASSES ///////////////////////
@@ -103,7 +103,7 @@ function init() { // Main function
             ctx.fillStyle = "black"
             ctx.fill()
             if (newX >= 1 && newY >= 1) {
-                ctx.drawImage(this.img, newX, newY)
+                ctx.drawImage(this.img, newX * gridW, newY * gridH)
             } else if (newX < 1 && newY < 1) {
                 newX = 1
                 newY = 1
@@ -260,6 +260,8 @@ function init() { // Main function
         ctx.font = "12pt ABeeZee"
         ctx.fillStyle = "white"
         ctx.fillText(virus.health, 20, 20)
+        ctx.fillText(virus.x, 100, 20)
+        ctx.fillText(antiArray[0].x)
         if (virus.health <= 0) {
             virus.health = ""
             end = true
