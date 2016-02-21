@@ -374,6 +374,8 @@ function init() { // Main function
     }
     
     window.addEventListener("load", function () { // runs when page loads, sets scene
+        console.log(gridCount)
+        console.log(yCount)
         virus.render()
         for (var i in antiArray) antiArray[i].render()
     }, false)
