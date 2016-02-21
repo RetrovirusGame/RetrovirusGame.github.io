@@ -166,19 +166,19 @@ function init() { // Main function
                 this.move(this.x, this.y -= 1)
                 lastDir = "up"
             } else if (this.x - v.x > 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { this.move(this.x -= 1, this.y); lastDir = "left" }, speed)
+                for (var i in antiArray) setTimeout(function () { antiArray[i].move(antiArray[i].x -= 1, antiArray[i].y); lastDir = "left" }, speed)
                 this.move(this.x, this.y -= 1)
                 lastDir = "up"
             } else if (this.x - v.x < 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { this.move(this.x += 1, this.y); lastDir = "right" }, speed)
+                for (var i in antiArray) setTimeout(function () { antiArray[i].move(antiArray[i].x += 1, antiArray[i].y); lastDir = "right" }, speed)
                 this.move(this.x, this.y += 1)
                 lastDir = "down"
             } else if (this.x - v.x > 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { this.move(this.x -= 1, this.y); lastDir = "left" }, speed)
+                for (var i in antiArray) setTimeout(function () { antiArray[i].move(antiArray[i].x -= 1, antiArray[i].y); lastDir = "left" }, speed)
                 this.move(this.x, this.y += 1)
                 lastDir = "down"
             } else if (this.x - v.x < 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { this.move(this.x += 1, this.y); lastDir = "right" }, speed)
+                for (var i in antiArray) setTimeout(function () { antiArray[i].move(antiArray[i].x += 1, antiArray[i].y); lastDir = "right" }, speed)
                 this.move(this.x, this.y -= 1)
                 lastDir = "up"
             }
