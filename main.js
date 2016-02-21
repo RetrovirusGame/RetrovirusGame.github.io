@@ -102,15 +102,15 @@ function init() { // Main function
             ctx.rect(0, 0, cW, cH) // Set the canvas background to black
             ctx.fillStyle = "black"
             ctx.fill()
-            if (newX < 1 && newY < 1) {
-                newX = 1
-                newY = 1
+            if (newX < 0 && newY < 0) {
+                newX = 0
+                newY = 0
                 ctx.drawImage(this.img, newX * gridW, newY * gridH)
-            } else if (newX < 1) {
-                newX = 1
+            } else if (newX < 0) {
+                newX = 0
                 this.render(newX, newY)
-            } else if (newY < 1) {
-                newY = 1
+            } else if (newY < 0) {
+                newY = 0
                 this.render(newX, newY)
             }
             ctx.drawImage(this.img, newX * gridW, newY * gridH)
