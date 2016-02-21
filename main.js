@@ -110,6 +110,7 @@ function init() { // Main function
             }
             if (newX > gridCount) {
                 newX = gridCount
+                console.log("nuuh")
             }
             if (newY > yCount) {
                 newY = yCount
@@ -260,7 +261,7 @@ function init() { // Main function
         ctx.font = "12pt ABeeZee"
         ctx.fillStyle = "white"
         ctx.fillText(virus.health, 20, 20)
-        ctx.fillText(virus.x + ", " + virus.y, 200, 100)
+        ctx.fillText(virus.x + ", ", 200, 100)
         ctx.fillText(antiArray[0].x + ", " + antiArray[i].y, 200, 200)
         if (virus.health <= 0) {
             virus.health = ""
