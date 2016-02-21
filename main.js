@@ -102,16 +102,17 @@ function init() { // Main function
             ctx.rect(0, 0, cW, cH) // Set the canvas background to black
             ctx.fillStyle = "black"
             ctx.fill()
-            if (newX < 0 && newY < 0) {
+            if (newX < 0) {
                 newX = 0
+            } 
+            if (newY < 0) {
                 newY = 0
-                ctx.drawImage(this.img, newX * gridW, newY * gridH)
-            } else if (newX < 0) {
-                newX = 0
-                this.render(newX, newY)
-            } else if (newY < 0) {
-                newY = 0
-                this.render(newX, newY)
+            }
+            if (newX > gridCount) {
+                newX = gridCount
+            }
+            if (newY > yCount) {
+                newY = yCount
             }
             ctx.drawImage(this.img, newX * gridW, newY * gridH)
             for (var i in antiArray) antiArray[i].render()
