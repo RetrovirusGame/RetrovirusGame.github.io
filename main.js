@@ -166,19 +166,19 @@ function init() { // Main function
                 this.move(this.x, this.y -= 1)
                 lastDir = "up"
             } else if (this.x - v.x > 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x -= 1, Antibody.y); lastDir = "left" }, speed)
+                setTimeout(function () { this.move(this.x -= 1, this.y); lastDir = "left" }, speed)
                 this.move(this.x, this.y -= 1)
                 lastDir = "up"
             } else if (this.x - v.x < 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x += 1, Antibody.y); lastDir = "right" }, speed)
+                setTimeout(function () { this.move(this.x += 1, this.y); lastDir = "right" }, speed)
                 this.move(this.x, this.y += 1)
                 lastDir = "down"
             } else if (this.x - v.x > 0 && this.y - v.y < 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x -= 1, Antibody.y); lastDir = "left" }, speed)
+                setTimeout(function () { this.move(this.x -= 1, this.y); lastDir = "left" }, speed)
                 this.move(this.x, this.y += 1)
                 lastDir = "down"
             } else if (this.x - v.x < 0 && this.y - v.y > 0 && this.x - v.x == this.y - v.y) {
-                setTimeout(function () { Antibody.move(Antibody.x += 1, Antibody.y); lastDir = "right" }, speed)
+                setTimeout(function () { this.move(this.x += 1, this.y); lastDir = "right" }, speed)
                 this.move(this.x, this.y -= 1)
                 lastDir = "up"
             }
