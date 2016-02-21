@@ -260,8 +260,8 @@ function init() { // Main function
         ctx.font = "12pt ABeeZee"
         ctx.fillStyle = "white"
         ctx.fillText(virus.health, 20, 20)
-        ctx.fillText(virus.x + ", " + virus.y, 20, 100)
-        ctx.fillText(antiArray[0].x + ", " + antiArray[i].y, 20, 200)
+        ctx.fillText(virus.x + ", " + virus.y, 200, 100)
+        ctx.fillText(antiArray[0].x + ", " + antiArray[i].y, 200, 200)
         if (virus.health <= 0) {
             virus.health = ""
             end = true
