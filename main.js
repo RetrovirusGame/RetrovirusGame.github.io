@@ -73,7 +73,7 @@ function init() { // Main function
         }
     }
     yCount -= 1
-    grid(Math.round(cW / 16)) // 20 squares across
+    grid(Math.round(cW / (16 * 4))) // 20 squares across
     
     /////////////////////// CLASSES ///////////////////////
     
