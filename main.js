@@ -314,7 +314,7 @@ function init() { // Main function
         }
         
         else if (right && up && !end) { // Right and Up
-            if (virus.x +  2 > cW || virus.y - 1 < 0) { return false } // For edge collision
+            if ((virus.x + 2) * gridW > cW || virus.y - 1 < 0) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x + 1, virus.y - 1)
                 virus.x += 1
@@ -324,7 +324,7 @@ function init() { // Main function
         }
         
         else if (left && down && !end) { // Left and Down
-            if (virus.x - 1 < 0 || virus.y + 2 > cH) { return false } // For edge collision
+            if (virus.x - 1 < 0 || virus.y + 2 > yCount) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x - 1, virus.y + 1)
                 virus.x -= 1
@@ -334,7 +334,7 @@ function init() { // Main function
         }
         
         else if (right && down && !end) { // Right and Down
-            if (virus.x + 2 > cW || virus.y + 2 > cH) { return false } // For edge collision
+            if ((virus.x + 2) * gridW > cW|| virus.y + 2 > yCount) { return false } // For edge collision
             else { // Print image at new position
                 virus.move(virus.x + 1, virus.y + 1)
                 virus.x += 1
@@ -362,7 +362,7 @@ function init() { // Main function
         }
         
         else if (right && !end) { // Right
-            if (virus.x + 2 > cW) { return false }
+            if ((virus.x + 2) * gridW > cW) { return false }
             else {
                 virus.move(virus.x + 1, virus.y)
                 virus.x += 1
@@ -371,7 +371,7 @@ function init() { // Main function
         }
                 
         else if (down && !end) { // Down
-            if (virus.y + 2 > cH) { return false }
+            if (virus.y + 2 > yCount) { return false }
             else {
                 virus.move(virus.x, virus.y + 1)
                 virus.y += 1
