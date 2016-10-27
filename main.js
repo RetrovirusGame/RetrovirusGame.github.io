@@ -391,4 +391,8 @@ function init() { // Main function
     })
 }
 
+function test() {
+    
+}
+
 document.addEventListener("DOMContentLoaded", init, false) // Run when the DOM has loaded
