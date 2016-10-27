@@ -42,7 +42,7 @@ function init() { // Main function
     ////////////////////// FUNCTIONS //////////////////////
     
     function getRandomRange(a, b) {
-        return Math.round(Math.random * (b - a)) + a)
+        return Math.round(Math.random() * (b - a)) + a)
     }
     
     function getRandom(a) {
