@@ -153,7 +153,7 @@ function init() { // Main function
                 y = this.y
             }
         
-            ctx.drawImage(this.img, x * gridW /*+ getRandom(gridW)*/, y * gridH /*+ getRandom(gridH)*/) // The virus is 8x8, and 8 / 2 = 4
+            ctx.drawImage(this.img, x * gridW + getRandom(gridW), y * gridH + getRandom(gridH)) // The virus is 8x8, and 8 / 2 = 4
         },
         
         move: function (newX, newY) { // same as the other one
