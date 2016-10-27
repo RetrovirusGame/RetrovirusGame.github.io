@@ -41,8 +41,15 @@ function init() { // Main function
     
     ////////////////////// FUNCTIONS //////////////////////
     
+    function writeText(text) { // Text writing function
+        ctx.textAlign = "center"
+        ctx.font = "12pt ABeeZee"
+        ctx.fillStyle = "white"
+        ctx.fillText(text, centerW, centerH)
+    }
+    
     function getRandomRange(a, b) {
-        return Math.round(Math.random() * (b - a)) + a)
+        return Math.round(Math.random() * (b - a)) + a
     }
     
     function getRandom(a) {
@@ -55,13 +62,6 @@ function init() { // Main function
 
     function getRandomX() {
         return getRandom(gridCount - 1)
-    }
-    
-    function writeText(text) { // Text writing function
-        ctx.textAlign = "center"
-        ctx.font = "12pt ABeeZee"
-        ctx.fillStyle = "white"
-        ctx.fillText(text, centerW, centerH)
     }
     
     function grid(countX) { // Sections where the virus will be
