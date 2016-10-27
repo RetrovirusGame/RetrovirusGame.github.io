@@ -137,7 +137,7 @@ function init() { // Main function
                 y = this.y
             }
         
-            ctx.drawImage(this.img, x * gridW + gridW / 2, y * gridH + gridH / 2) // The virus is 8x8, and 8 / 2 = 4
+            ctx.drawImage(this.img, x * gridW + getRandom(gridW), y * gridH + getRandom(gridH)) // The virus is 8x8, and 8 / 2 = 4
         },
         
         move: function (newX, newY) { // same as the other one
@@ -203,12 +203,20 @@ function init() { // Main function
     virus.x = Math.round(gridCount / 2) // Set the virus's starting position
     virus.y = Math.round(yCount / 2) // To offset image for collision
     
+    function getRandomRange(a, b) {
+        return Math.round(Math.random * (b - a)) + a)
+    }
+    
+    function getRandom(a) {
+        return getRandomRange(0, a)   
+    }
+    
     function getRandomY() {
-        return Math.round(Math.random() * (yCount))
+        return getRandom(yCount)
     }
 
     function getRandomX() {
-        return Math.round(Math.random() * (gridCount - 1))
+        return getRandom(gridCount - 1)
     }
 
     for (var i = 0; i < numAnti; i++) {
