@@ -41,6 +41,22 @@ function init() { // Main function
     
     ////////////////////// FUNCTIONS //////////////////////
     
+    function getRandomRange(a, b) {
+        return Math.round(Math.random * (b - a)) + a)
+    }
+    
+    function getRandom(a) {
+        return getRandomRange(0, a)   
+    }
+    
+    function getRandomY() {
+        return getRandom(yCount)
+    }
+
+    function getRandomX() {
+        return getRandom(gridCount - 1)
+    }
+    
     function writeText(text) { // Text writing function
         ctx.textAlign = "center"
         ctx.font = "12pt ABeeZee"
@@ -202,22 +218,6 @@ function init() { // Main function
     
     virus.x = Math.round(gridCount / 2) // Set the virus's starting position
     virus.y = Math.round(yCount / 2) // To offset image for collision
-    
-    function getRandomRange(a, b) {
-        return Math.round(Math.random * (b - a)) + a)
-    }
-    
-    function getRandom(a) {
-        return getRandomRange(0, a)   
-    }
-    
-    function getRandomY() {
-        return getRandom(yCount)
-    }
-
-    function getRandomX() {
-        return getRandom(gridCount - 1)
-    }
 
     for (var i = 0; i < numAnti; i++) {
         antiArray[i].x = getRandomX()
