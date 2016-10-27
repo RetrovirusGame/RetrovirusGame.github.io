@@ -111,6 +111,10 @@ function init() { // Main function
             }
         
             ctx.drawImage(this.img, x * gridW, y * gridH)
+            ctx.textAlign = "center"
+    		ctx.font = "12pt ABeeZee"
+    		ctx.fillStyle = "white"
+    		ctx.fillText("(" + x + ", " + y + ")", centerW, centerH)
         },
         
         move: function (newX, newY) { // move virus to new location
