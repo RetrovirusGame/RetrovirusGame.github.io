@@ -23,7 +23,8 @@ function init() { // Main function
         lastDir,
         end = false,
         lostText = "",
-        speed = 150
+        speed = 150,
+        prevHealth
     
     c.width = width
     c.height = height
@@ -98,6 +99,7 @@ function init() { // Main function
         this.y = y
         this.img = img
         this.health = 20
+        prevHealth = this.health
     }
     
     RetroVirus.prototype = { // Virus prototype functions
@@ -272,7 +274,10 @@ function init() { // Main function
         ctx.textAlign = "center"
         ctx.font = "12pt ABeeZee"
         ctx.fillStyle = "white"
-        ctx.fillText(virus.health, 20, 20)
+        if (prevHealth != virus.health) {
+            ctx.fillText(virus.health, 20, 20)
+            prevHealth = virus.health;
+        }
         if (virus.health <= 0) {
             virus.health = ""
             end = true
